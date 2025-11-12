@@ -4,7 +4,11 @@
 #include <iostream>
 #include <vector>
 #include <map>
-
+#include <chrono>
+#include <fstream>
+#include <ctime>
+#include <filesystem>
+#include <algorithm>
 
 using namespace std;
 
@@ -70,10 +74,12 @@ class Team
 		"SOMBRA", "SYM", "TORB", "TRACER", "VENTURE", "WIDOW", "ANA", "BAP",
 		"BRIG", "ILLARI", "JUNO", "KIRI", "LW", "LUCIO", "MERCY", "MOIRA", "WU", "ZEN"};
 		vector<map<string, string>>	_teamComps;
+		vector<unsigned int>	_heroCount;
 		enum	heroes	_hero;
 		bool	_dps = false;
 		bool	_supp = false;
 		size_t	_comps = 0;
+		void	calcStats();
 	public:
 		Team();
 		Team(string name);
@@ -86,6 +92,10 @@ class Team
 		void	deleteTeam();
 		void	updateTime();
 		void	printComp(size_t i);
+		void	printAllComps();
+		void	printTanks();
+		void	printSupps();
+		void	printDps();
 		void	newTeam();
 		vector<map<string, string>> getComps() const;
 		string	getName() const;

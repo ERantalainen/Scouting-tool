@@ -1,10 +1,12 @@
 #include "Team.hpp"
 
-#include <chrono>
-#include <fstream>
-#include <ctime>
-#include <filesystem>
-#include <algorithm>
+
+
+static	void	clearScreen()
+{
+	cout << "\033c";
+	cout.flush();
+}
 
 Team::Team()
 {
@@ -13,13 +15,14 @@ Team::Team()
 	_created = chrono::system_clock::to_time_t(time);
 	_updated = _created;
 	_save = "test";
-
+	_heroCount.resize(_heroes.size());
 	ofstream team_file(_save);
 	if (!team_file.is_open())
 		std::cerr << "Could not open team file: " << _save << "\n";
 	else
 		team_file.close();
-
+	for (size_t i = 0; i < _heroCount.size(); i++)
+		_heroCount[i] = 0;
 }
 
 Team::Team(string name) : _name(name), _save(name)
@@ -28,11 +31,14 @@ Team::Team(string name) : _name(name), _save(name)
 	auto time = chrono::system_clock::now();
 	_created = chrono::system_clock::to_time_t(time);
 	_updated = _created;
+	_heroCount.resize(_heroes.size());
 	ofstream team_file(_save);
 	if (!team_file.is_open())
 		std::cerr << "Could not open team file: " << _save << "\n";
 	else
 		team_file.close();
+	for (size_t i = 0; i < _heroCount.size(); i++)
+		_heroCount[i] = 0;
 }
 
 Team::~Team()
@@ -145,8 +151,7 @@ void	Team::newTeam()
 				_supp = false;
 			}
 		}
-		cout << "\033c";
-		cout.flush();
+		clearScreen();
 	}
 }
 
@@ -157,6 +162,7 @@ vector<map<string, string>>	Team::getComps() const
 
 void	Team::newComp()
 {
+	updateTime();
 	_teamComps.resize(_comps + 1);
 	_teamComps[_comps].emplace("TANK", "EMPTY");
 	_teamComps[_comps].emplace("DPS1", "EMPTY");
@@ -235,9 +241,74 @@ void	Team::addHeroes(size_t i)
 			_supp = false;
 		}
 	}
-	cout << "\033c";
-	cout.flush();
+	clearScreen();
+}
 
+void	Team::calcStats()
+{
+	int	index;
+	for (size_t i = 0; i < _teamComps.size(); i++)
+	{
+		auto mit = _teamComps[i].begin();
+			while (mit != _teamComps[i].end())
+			{
+				auto it = find(_heroes.begin(), _heroes.end(), mit->second);
+				if (it != _heroes.end())
+				{
+					index = distance(_heroes.begin(), it);
+					_heroCount[index]++;
+				}
+				mit++;
+			}
+	}
+}
+
+void	Team::printAllComps()
+{
+	vector<pair<double, int>>	mostCommon;
+	calcStats();
+	for (size_t i = 0; i < _teamComps.size(); i++)
+	{
+		printComp(i);
+		std::cout << std::endl;
+	}
+	std::cout << HIGREEN << "Overall: " << RESET << "\n";
+	double	percentage = 0;
+	for (size_t i = 0; i < 13; i++)
+	{
+		if (_heroCount[i] == 0)
+			continue ;
+		std::cout <<  BCYAN << "	" << _heroes[i] << RESET << HICYAN " picked: " << _heroCount[i];
+		percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
+		std::cout << " (" << setprecision(3) << percentage << "%)\n" << RESET;
+		if (_heroCount[i] > _comps / 3)
+			mostCommon.push_back(make_pair(percentage, i));
+	}
+	for (size_t i = 13; i < _heroes.size(); i++)
+	{
+		if (_heroCount[i] == 0)
+			continue ;
+		std::cout << BCYAN << "	" << _heroes[i] << RESET << HICYAN << " picked: " << _heroCount[i];
+		percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
+		std::cout << " (" << setprecision(3) << percentage << "%)\n" << RESET;
+		if (_heroCount[i] > (_comps / 3))
+			mostCommon.push_back(make_pair(percentage, i));
+	}
+	std::cout << HIGREEN << "Most common: \n" << RESET;
+	sort(mostCommon.begin(), mostCommon.end());
+	for (size_t i = 0; i < mostCommon.size(); i++)
+	{
+		std::cout << HIWHITE << setw(10) << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n" << RESET;
+	}
+}
+
+void	Team::printTanks()
+{
+		for (size_t i = 0; i < _teamComps.size(); i++)
+	{
+		cout << BGREEN << "	TANK: " << RESET << HIGREEN << _teamComps[i]["TANK"] << RESET << "\n";
+		std::cout << std::endl;
+	}
 }
 
 std::ostream & operator<<(std::ostream &stream, const Team &object)
