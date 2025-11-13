@@ -8,10 +8,46 @@ void	listTeams(vector<Team *> teams)
 	}
 }
 
+void loadTeams(vector<Team *> &teams)
+{
+	ifstream		save;
+	string			team;
+	string			heroes[5];
+	string			hero;
+	unsigned int	i = 0;
+
+	save.open(SAVEDATA);
+	if (!save.is_open())
+		std::cerr << HIRED << "Unable to open/create save file\n" << RESET;
+	while (getline(save, team))
+	{
+		ifstream teamData(team);
+		if (!teamData.is_open())
+		{
+			std::cerr << HIRED << "Unable to load team data from file: " << team << "\n" << RESET;
+			continue;
+		}
+		teams.push_back(new Team(team));
+		while (getline(teamData, hero))
+		{
+			heroes[i] = hero;
+			i++;
+			if (i == 5)
+			{
+				teams[teams.size() - 1]->addComp(heroes);
+				for (int j = 0; j < 5; j++)
+					heroes[j].clear();
+				i = 0;
+			}
+		}
+	}
+}
+
 int main ()
 {
 	vector<Team *>	teams;
 	cout << HIGREEN << "WELCOME TO THE SCOUTING MANAGER\n\n\n" << RESET;
+	loadTeams(teams);
 	while (1)
 	{
 		string	input;
@@ -52,6 +88,11 @@ int main ()
 		}
 		if (option == 2)
 		{
+			if (teams.size() < 1)
+			{
+				std::cerr << HIRED << "No teams to edit, please create a team first\n";
+				continue;
+			}
 			std::cout << HIWHITE << "Select a team:\n\n" << RESET;
 			listTeams(teams);
 			std::cout << HIWHITE << "Input team: ";
@@ -95,8 +136,13 @@ int main ()
 				}
 			}
 		}
-		if (option == 4)
+		if (option == 3)
 		{
+			if (teams.size() < 1)
+			{
+				std::cerr << HIRED << "No teams to delete, please create a team first\n";
+				continue;
+			}
 			std::cout << HIWHITE << "Select a team:\n\n" << RESET;
 			listTeams(teams);
 			std::cout << HIWHITE << "Input team: ";
@@ -112,7 +158,40 @@ int main ()
 				continue ;
 			}
 			if (option < 0 || static_cast<unsigned int>(option) > teams.size())
+			{
+				std::cout << HIRED << "Invalid input returning \n";
 				continue ;
+			}
+			delete teams[option - 1];
+			teams.erase(teams.begin() + (option - 1));
+		}
+		if (option == 4)
+		{
+			if (teams.size() < 1)
+			{
+				std::cerr << HIRED << "No teams to display, please create a team first\n";
+				continue;
+			}
+			std::cout << HIWHITE << "Select a team:\n\n" << RESET;
+			listTeams(teams);
+			std::cout << HIWHITE << "Input team: ";
+			std::cin >> input;
+			std::cout << RESET;
+			try
+			{
+				option = stoi(input);
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << e.what() << '\n';
+				std::cout << HIRED << "Invalid input returning \n";
+				continue ;
+			}
+			if (option < 0 || static_cast<unsigned int>(option) > teams.size())
+			{
+				std::cout << HIRED << "Invalid input returning \n";
+				continue ;
+			}
 			teams[option - 1]->printAllComps();
 			cout << "\n\n";
 		}

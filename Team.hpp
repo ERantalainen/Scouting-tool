@@ -8,9 +8,12 @@
 #include <fstream>
 #include <ctime>
 #include <filesystem>
+#include <cstring>
 #include <algorithm>
 
 using namespace std;
+
+#define SAVEDATA	"save.dat"
 
 enum	heroes
 {
@@ -89,6 +92,7 @@ class Team
 		void	getHeroes();
 		void	addHeroes(size_t i);
 		void	newComp();
+		void	addComp(string heroes[5]);
 		void	deleteTeam();
 		void	updateTime();
 		void	printComp(size_t i);
@@ -97,6 +101,7 @@ class Team
 		void	printSupps();
 		void	printDps();
 		void	newTeam();
+		void	saveTeam();
 		vector<map<string, string>> getComps() const;
 		string	getName() const;
 		string	getSaveName() const;

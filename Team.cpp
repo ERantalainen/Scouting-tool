@@ -8,8 +8,32 @@ static	void	clearScreen()
 	cout.flush();
 }
 
+
+void	Team::addComp(string heroes[5])
+{
+	string	role;
+
+	this->newComp();
+	for (size_t i = 0; i < 5; i++)
+	{
+		if (heroes[i].find(":") == string::npos)
+		{
+			std::cerr << HIRED << "Invalid/Corrupted save file\n" << RESET;
+		}
+		role = heroes[i].substr(0, heroes[i].find(":"));
+		_teamComps[_comps - 1][role] = heroes[i].substr(heroes[i].find(":") + 1);
+	}
+}
+
 Team::Team()
 {
+	ofstream	save;
+
+	save.open(SAVEDATA, ios_base::app);
+	if (!save.is_open())
+	{
+		std::cerr << HIRED << "Unable to open/create save file\n" << RESET;
+	}
 	_name = "empty";
 	auto time = chrono::system_clock::now();
 	_created = chrono::system_clock::to_time_t(time);
@@ -23,22 +47,41 @@ Team::Team()
 		team_file.close();
 	for (size_t i = 0; i < _heroCount.size(); i++)
 		_heroCount[i] = 0;
+	save << _save << "\n";
+	save.close();
 }
 
 Team::Team(string name) : _name(name), _save(name)
 {
+	fstream	save;
+	string		check;
+	save.open(SAVEDATA, ios_base::app);
+	if (!save.is_open())
+	{
+		std::cerr << HIRED << "Unable to open/create save file\n" << RESET;
+	}
 	std::cout << BYELLOW << "created team: " << _name << "\n" << RESET;
 	auto time = chrono::system_clock::now();
 	_created = chrono::system_clock::to_time_t(time);
 	_updated = _created;
 	_heroCount.resize(_heroes.size());
-	ofstream team_file(_save);
+	fstream team_file(_save);
 	if (!team_file.is_open())
 		std::cerr << "Could not open team file: " << _save << "\n";
 	else
 		team_file.close();
 	for (size_t i = 0; i < _heroCount.size(); i++)
 		_heroCount[i] = 0;
+	while(getline(save, check))
+	{
+		if (check.compare(_save) == 0)
+		{
+			save.close();
+			return ;
+		}
+	}
+	save << _save << "\n";
+	save.close();
 }
 
 Team::~Team()
@@ -153,11 +196,34 @@ void	Team::newTeam()
 		}
 		clearScreen();
 	}
+	saveTeam();
 }
 
 vector<map<string, string>>	Team::getComps() const
 {
 	return _teamComps;
+}
+
+void	Team::saveTeam()
+{
+	fstream	team(_save, ios_base::app);
+
+	if (!team.is_open())
+	{
+		std::cerr << HIRED << "Unable to open/create file: " << strerror(errno) << "\n";
+		return ;;
+	}
+	for (size_t i = 0; i < _teamComps.size(); i++)
+	{
+		auto it = _teamComps[i].begin();
+		while (it != _teamComps[i].end())
+		{
+			std::cout << it->first << ":" << it->second << "\n";
+			team << it->first << ":" << it->second << "\n";
+			it++;
+		}
+	}
+	team.close();
 }
 
 void	Team::newComp()
@@ -241,6 +307,7 @@ void	Team::addHeroes(size_t i)
 			_supp = false;
 		}
 	}
+	saveTeam();
 	clearScreen();
 }
 
@@ -310,6 +377,8 @@ void	Team::printTanks()
 		std::cout << std::endl;
 	}
 }
+
+
 
 std::ostream & operator<<(std::ostream &stream, const Team &object)
 {
