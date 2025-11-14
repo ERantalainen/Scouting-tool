@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#define SAVEDATA	"save.dat"
+#define SAVEDATA	"./data/save.dat"
 
 enum	heroes
 {
@@ -76,6 +76,10 @@ class Team
 		"FREJA", "GENJI", "HANZO", "JUNK", "MEI", "PHARAH", "REAPER", "SOJ", "SOLDIER",
 		"SOMBRA", "SYM", "TORB", "TRACER", "VENTURE", "WIDOW", "ANA", "BAP",
 		"BRIG", "ILLARI", "JUNO", "KIRI", "LW", "LUCIO", "MERCY", "MOIRA", "WU", "ZEN"};
+		const	vector<string>	_maps = { "ANTARCTIC", "BUSAN", "ILIOS", "LIJAG", "NEPAL",
+		"OASIS", "SAMOA", "CIRCUIT", "DORADO", "HAVANA", "JUNKERTOWN", "RIALTO", "ROUTE",
+		"SHAMBALI", "GIB", "AATLIS", "NJC", "SURA", "BLIZZ", "EICH", "HOLLYWOOD",  "KR",
+		"MIDTOWN", "NUMBANI", "PARAISO", "COLOSSEO", "ESPERANCA", "NQS", "RUNASAPI" };
 		vector<map<string, string>>	_teamComps;
 		vector<unsigned int>	_heroCount;
 		enum	heroes	_hero;
@@ -83,6 +87,7 @@ class Team
 		bool	_supp = false;
 		size_t	_comps = 0;
 		void	calcStats();
+		void	sortComp(int i);
 	public:
 		Team();
 		Team(string name);
@@ -102,6 +107,7 @@ class Team
 		void	printDps();
 		void	newTeam();
 		void	saveTeam();
+		void	selectMap(int i);
 		vector<map<string, string>> getComps() const;
 		string	getName() const;
 		string	getSaveName() const;

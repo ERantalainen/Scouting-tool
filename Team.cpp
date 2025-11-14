@@ -51,11 +51,14 @@ Team::Team()
 	save.close();
 }
 
-Team::Team(string name) : _name(name), _save(name)
+Team::Team(string name) : _name(name)
 {
-	fstream	save;
+	fstream		save;
 	string		check;
-	save.open(SAVEDATA, ios_base::app);
+
+	_save = "./data/" + _name;
+	filesystem::create_directory("./data");
+	save.open(SAVEDATA);
 	if (!save.is_open())
 	{
 		std::cerr << HIRED << "Unable to open/create save file\n" << RESET;
@@ -65,7 +68,8 @@ Team::Team(string name) : _name(name), _save(name)
 	_created = chrono::system_clock::to_time_t(time);
 	_updated = _created;
 	_heroCount.resize(_heroes.size());
-	fstream team_file(_save);
+
+	fstream team_file(_save, ios::out);
 	if (!team_file.is_open())
 		std::cerr << "Could not open team file: " << _save << "\n";
 	else
@@ -80,6 +84,8 @@ Team::Team(string name) : _name(name), _save(name)
 			return ;
 		}
 	}
+	save.close();
+	save.open(SAVEDATA, ios_base::app);
 	save << _save << "\n";
 	save.close();
 }
@@ -136,12 +142,69 @@ void	Team::updateTime()
 	auto time = chrono::system_clock::now();
 	_updated = chrono::system_clock::to_time_t(time);
 }
+/*
+	Predefined target order:
+	MAP:
+	TANK:
+	DPS1:
+	DPS2:
+	SUPP1:
+	SUPP2:
+*/
+void	Team::sortComp(int i)
+{
+	auto itA = _teamComps[i].begin();
+	if (itA->first != "MAP")
+	{
+		auto itB = _teamComps[i].find("MAP");
+		if (itB != _teamComps[i].end())
+			std::swap(itA, itB);
+	}
+	itA++;
+	if (itA->first != "TANK")
+	{
+		auto itB = _teamComps[i].find("TANK");
+		if (itB != _teamComps[i].end())
+			std::swap(itA, itB);
+	}
+	itA++;
+	if (itA->first != "DPS1")
+	{
+		auto itB = _teamComps[i].find("DPS1");
+		if (itB != _teamComps[i].end())
+			std::swap(itA, itB);
+	}
+	itA++;
+	if (itA->first != "DPS2")
+	{
+		auto itB = _teamComps[i].find("DPS2");
+		if (itB != _teamComps[i].end())
+			std::swap(itA, itB);
+	}
+	itA++;
+	if (itA->first != "SUPP1")
+	{
+		auto itB = _teamComps[i].find("SUPP1");
+		if (itB != _teamComps[i].end())
+			std::swap(itA, itB);
+	}
+	itA++;
+	if (itA->first != "SUPP2")
+	{
+		auto itB = _teamComps[i].find("SUPP2");
+		if (itB != _teamComps[i].end())
+			std::swap(itA, itB);
+	}
+}
 
 void	Team::newTeam()
 {
 	string	input;
 	size_t	index;
 	newComp();
+	sortComp(_comps - 1);
+	selectMap(_comps - 1);
+	clearScreen();
 	for (int j = 0; j < 5; j++)
 	{
 		cout <<"\n";
@@ -196,6 +259,7 @@ void	Team::newTeam()
 		}
 		clearScreen();
 	}
+	clearScreen();
 	saveTeam();
 }
 
@@ -235,11 +299,14 @@ void	Team::newComp()
 	_teamComps[_comps].emplace("DPS2", "EMPTY");
 	_teamComps[_comps].emplace("SUPP1", "EMPTY");
 	_teamComps[_comps].emplace("SUPP2", "EMPTY");
+	_teamComps[_comps].emplace("MAP", "EMPTY");
+	sortComp(_comps);
 	_comps++;
 }
 
 void	Team::printComp(size_t i)
 {
+	cout << HIWHITE << "	MAP: " << _teamComps[i]["MAP"] << RESET << "\n";
 	cout << BGREEN << "	TANK: " << RESET << HIGREEN << _teamComps[i]["TANK"] << RESET << "\n";
 	cout << BBLUE << "	DPS: " << RESET << HIBLUE << _teamComps[i]["DPS1"] << "\n" << RESET;
 	cout << BBLUE << "	DPS: " << RESET << HIBLUE << _teamComps[i]["DPS2"] << "\n" << RESET;
@@ -330,6 +397,39 @@ void	Team::calcStats()
 	}
 }
 
+static	void	print_vector(vector<string>	vec)
+{
+	for (size_t i = 0; i < vec.size(); i++)
+	{
+		cout << HIGREEN << i + 1 << ": " << vec[i] << "\n" << RESET;
+	}
+}
+
+void	Team::selectMap(int i)
+{
+	string	input;
+	int		index;
+
+	print_vector(_maps);
+	cout << HIYELLOW << "Select  a map: " << RESET;
+	while (1)
+	{
+		std::cin >> input;
+		if (input.empty())
+			return ;
+		std::transform(input.begin(), input.end(), input.begin(), ::toupper);
+		auto it = find(_maps.begin(), _maps.end(), input);
+		if (it == _maps.end())
+			std::cout << BRED << input << " is not a valid map\n" << RESET;
+		else
+		{
+			index = distance(_maps.begin(), it);
+			break ;
+		}
+	}
+	_teamComps[i]["MAP"] = _maps[i];
+}
+
 void	Team::printAllComps()
 {
 	vector<pair<double, int>>	mostCommon;
@@ -395,7 +495,7 @@ std::ostream & operator<<(std::ostream &stream, const Team &object)
 	stream << BCYAN << "Team Comps:\n" << RESET;
 	for (size_t i = 0; i < comps.size(); i++)
 	{
-		stream << BWHITE << "Composition: " << i + 1 << "\n";
+		stream << BWHITE << "Composition: " << i + 1 << "\n"  << RESET << HIYELLOW << "	MAP: " << comps[i]["MAP"] << "\n" << RESET;
 		stream << HIGREEN << "	TANK: " << comps[i]["TANK"] << RESET << "\n";
 		stream << HIBLUE << "	DPS: " << comps[i]["DPS1"] << "\n";
 		stream << "	DPS: " << comps[i]["DPS2"] << "\n" << RESET;

@@ -12,27 +12,32 @@ CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
 SRCS = main.cpp Team.cpp
-OBJS = $(SRCS:.cpp=.o)
+SRC_DIR = ./
+OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+OBJ_DIR = ./obj
 HEADERS = Team.hpp
 NAME = ScoutApp
 CC = @c++
-FLAGS = -Wall -Wextra -Werror -std=c++20 -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror -std=c++20 -g
 
 all: $(NAME)
 
-%.o: %.cpp $(HEADERS)
-	$(CC) $(FLAGS) -c $< -o $@
-	@echo -e $(LGREEN)Compiling OBJ files$(OFF)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
+	@mkdir -p $(dir $@)
+	@c++ $(CFLAGS) $(STD) -c $< -o $@
+	echo -e $(LGREEN)Compilingobj files
 
 $(NAME): $(OBJS)
 		$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 		@echo -e $(GREEN)Compiled $(NAME)$(OFF)
 
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(OBJ_DIR)
+	echo -e $(RED)Cleaning OBJ files$(OFF)
 
 fclean: clean
 	@rm -f $(NAME)
+	echo -e $(RED)Cleaning executable$(OFF)
 
 re: fclean all
 
