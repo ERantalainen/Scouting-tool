@@ -427,7 +427,7 @@ void	Team::selectMap(int i)
 			break ;
 		}
 	}
-	_teamComps[i]["MAP"] = _maps[i];
+	_teamComps[i]["MAP"] = _maps[index];
 }
 
 void	Team::printAllComps()
