@@ -12,7 +12,7 @@ void loadTeams(vector<Team *> &teams)
 {
 	ifstream		save;
 	string			team;
-	string			heroes[5];
+	string			heroes[6];
 	string			hero;
 	unsigned int	i = 0;
 
@@ -32,10 +32,10 @@ void loadTeams(vector<Team *> &teams)
 		{
 			heroes[i] = hero;
 			i++;
-			if (i == 5)
+			if (i == 6)
 			{
 				teams[teams.size() - 1]->addComp(heroes);
-				for (int j = 0; j < 5; j++)
+				for (int j = 0; j < 6; j++)
 					heroes[j].clear();
 				i = 0;
 			}

@@ -9,12 +9,12 @@ static	void	clearScreen()
 }
 
 
-void	Team::addComp(string heroes[5])
+void	Team::addComp(string heroes[6])
 {
 	string	role;
 
 	this->newComp();
-	for (size_t i = 0; i < 5; i++)
+	for (size_t i = 0; i < 6; i++)
 	{
 		if (heroes[i].find(":") == string::npos)
 		{
