@@ -40,7 +40,7 @@ Team::Team()
 	_updated = _created;
 	_save = "test";
 	_heroCount.resize(_heroes.size());
-	ofstream team_file(_save);
+	ofstream team_file(_save, ios_base::app);
 	if (!team_file.is_open())
 		std::cerr << "Could not open team file: " << _save << "\n";
 	else
@@ -53,7 +53,8 @@ Team::Team()
 
 Team::Team(string name) : _name(name)
 {
-	fstream		save;
+	ifstream		save;
+	ofstream		test;
 	string		check;
 
 	_save = "./data/" + _name;
@@ -69,7 +70,7 @@ Team::Team(string name) : _name(name)
 	_updated = _created;
 	_heroCount.resize(_heroes.size());
 
-	fstream team_file(_save, ios::out);
+	ofstream team_file(_save, ios_base::app);
 	if (!team_file.is_open())
 		std::cerr << "Could not open team file: " << _save << "\n";
 	else
@@ -85,9 +86,9 @@ Team::Team(string name) : _name(name)
 		}
 	}
 	save.close();
-	save.open(SAVEDATA, ios_base::app);
-	save << _save << "\n";
-	save.close();
+	test.open(SAVEDATA, ios_base::app);
+	test << _save << "\n";
+	test.close();
 }
 
 Team::~Team()
@@ -270,12 +271,12 @@ vector<map<string, string>>	Team::getComps() const
 
 void	Team::saveTeam()
 {
-	fstream	team(_save, ios_base::app);
+	fstream	team(_save);
 
 	if (!team.is_open())
 	{
 		std::cerr << HIRED << "Unable to open/create file: " << strerror(errno) << "\n";
-		return ;;
+		return ;
 	}
 	for (size_t i = 0; i < _teamComps.size(); i++)
 	{
@@ -475,6 +476,39 @@ void	Team::printTanks()
 	{
 		cout << BGREEN << "	TANK: " << RESET << HIGREEN << _teamComps[i]["TANK"] << RESET << "\n";
 		std::cout << std::endl;
+	}
+}
+
+void	Team::displayMapStats()
+{
+	string	input;
+	int		index;
+
+	print_vector(_maps);
+	while (1)
+	{
+		cout << HIYELLOW << "Select  a map: " << RESET;
+		std::cin >> input;
+		if (input.empty())
+			return ;
+		std::transform(input.begin(), input.end(), input.begin(), ::toupper);
+		auto it = find(_maps.begin(), _maps.end(), input);
+		if (it == _maps.end())
+			std::cout << BRED << input << " is not a valid map\n" << RESET;
+		else
+		{
+			index = distance(_maps.begin(), it);
+			break ;
+		}
+	}
+	string map = _maps[index]; 
+	for (size_t i = 0; i < _comps; i++)
+	{
+		if (_teamComps[i]["MAP"] == map)
+		{
+			printComp(i);
+			std::cout << "\n";
+		}
 	}
 }
 

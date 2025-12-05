@@ -108,6 +108,7 @@ class Team
 		void	newTeam();
 		void	saveTeam();
 		void	selectMap(int i);
+		void	displayMapStats();
 		vector<map<string, string>> getComps() const;
 		string	getName() const;
 		string	getSaveName() const;

@@ -27,7 +27,7 @@ void loadTeams(vector<Team *> &teams)
 			std::cerr << HIRED << "Unable to load team data from file: " << team << "\n" << RESET;
 			continue;
 		}
-		teams.push_back(new Team(team));
+		teams.push_back(new Team(team.substr(team.find_last_of("/") + 1)));
 		while (getline(teamData, hero))
 		{
 			heroes[i] = hero;
@@ -55,7 +55,7 @@ int main ()
 
 		cout << BWHITE << "Choose an OPTION:\n";
 		cout <<	"	1. Create new team\n" << "	2. Edit team\n" << "	3. Delete team\n";
-		cout << "	4. Display Team stats\n";
+		cout << "	4. Display Team stats\n	5. Display map comps\n";
 		cin >> input;
 		try
 		{
@@ -81,7 +81,7 @@ int main ()
 					teams[teams.size() - 1]->newTeam();
 				else
 				{
-					std::cout << (*teams[option - 1]);
+					std::cout << (*teams[option - 1]) << "\n";
 					break ;
 				}
 			}
@@ -194,6 +194,30 @@ int main ()
 			}
 			teams[option - 1]->printAllComps();
 			cout << "\n\n";
+		}
+		if (option == 5)
+		{
+			std::cout << HIWHITE << "Select a team:\n\n" << RESET;
+			listTeams(teams);
+			std::cout << HIWHITE << "Input team: ";
+			std::cin >> input;
+			std::cout << RESET;
+			try
+			{
+				option = stoi(input);
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << e.what() << '\n';
+				std::cout << HIRED << "Invalid input returning \n";
+				continue ;
+			}
+			if (option < 0 || static_cast<unsigned int>(option) > teams.size())
+			{
+				std::cout << HIRED << "Invalid input returning \n";
+				continue ;
+			}
+			teams[option - 1]->displayMapStats();
 		}
 	}
 }
