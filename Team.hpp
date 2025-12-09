@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <QDebug>
 #include <QSignalBlocker>
+#include <QTimer>
 
 using namespace std;
 

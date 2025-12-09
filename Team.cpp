@@ -23,6 +23,7 @@ void	Team::addComp(string heroes[6])
 		role = heroes[i].substr(0, heroes[i].find(":"));
 		_teamComps[_comps - 1][role] = heroes[i].substr(heroes[i].find(":") + 1);
 	}
+    saveTeam();
 }
 
 Team::Team()
@@ -154,6 +155,8 @@ void	Team::updateTime()
 */
 void	Team::sortComp(int i)
 {
+    if (i < 0 || i > _teamComps.size())
+        return ;
 	auto itA = _teamComps[i].begin();
 	if (itA->first != "MAP")
 	{
@@ -283,7 +286,6 @@ void	Team::saveTeam()
 		auto it = _teamComps[i].begin();
 		while (it != _teamComps[i].end())
 		{
-			std::cout << it->first << ":" << it->second << "\n";
 			team << it->first << ":" << it->second << "\n";
 			it++;
 		}
@@ -597,7 +599,10 @@ size_t Team::getCompAmt()
 
 string  *Team::getComp(size_t i)
 {
-    string  comp[6];
+    string  *comp = new string[6];
+
+    sortComp(i);
+    qDebug() << _teamComps[i];
     auto it = _teamComps[i].begin();
     for (size_t j = 0; j < 6; j++)
     {
@@ -611,10 +616,11 @@ void    Team::changeComp(int heroes[5], int index)
 {
     qDebug() << heroes << " " << index << "\n";
     _teamComps[index]["TANK"] = _heroes[heroes[0]];
-    _teamComps[index]["DPS1"] = _heroes[heroes[1]];
-    _teamComps[index]["DPS2"] = _heroes[heroes[2]];
-    _teamComps[index]["SUPP1"] = _heroes[heroes[3]];
-    _teamComps[index]["SUPP2"] = _heroes[heroes[4]];
+    _teamComps[index]["DPS1"] = _heroes[heroes[1] + 13];
+    _teamComps[index]["DPS2"] = _heroes[heroes[2] + 13];
+    _teamComps[index]["SUPP1"] = _heroes[heroes[3] + 32];
+    _teamComps[index]["SUPP2"] = _heroes[heroes[4] + 32];
+    sortComp(index);
     saveTeam();
     updateTime();
 }

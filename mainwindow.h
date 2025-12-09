@@ -62,6 +62,10 @@ private slots:
 
     void on_EditCompSel_activated(int index);
 
+    void on_AddCompMenu_clicked();
+
+    void on_AddComp_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

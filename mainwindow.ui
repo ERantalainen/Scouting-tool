@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="MenuPage">
      <property name="contextMenuPolicy">
@@ -60,7 +60,7 @@
       <property name="geometry">
        <rect>
         <x>270</x>
-        <y>150</y>
+        <y>210</y>
         <width>81</width>
         <height>24</height>
        </rect>
@@ -82,17 +82,17 @@
        <string>View Stats</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="ViewMap">
+     <widget class="QPushButton" name="AddCompMenu">
       <property name="geometry">
        <rect>
         <x>270</x>
-        <y>210</y>
+        <y>150</y>
         <width>81</width>
         <height>24</height>
        </rect>
       </property>
       <property name="text">
-       <string>View by Map</string>
+       <string>Add Comps</string>
       </property>
      </widget>
     </widget>
@@ -297,7 +297,7 @@
       </item>
      </widget>
     </widget>
-    <widget class="QWidget" name="ViewMapPage">
+    <widget class="QWidget" name="AddCompPage">
      <widget class="QPushButton" name="BackMap">
       <property name="geometry">
        <rect>
@@ -309,6 +309,625 @@
       </property>
       <property name="text">
        <string>BACK</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="AddTeamSel">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="AddDps1">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>120</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>ASHE</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BASTION</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>CASS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ECHO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>FREJA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>GENJI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HANZO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>JUNK</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>PHARAH</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>REAPER</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SOJ</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SOLDIER</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SOMBRA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SYM</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>TORB</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>TRACER</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>VENTURE</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>WIDOW</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="AddDps2">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>120</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>ASHE</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BASTION</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>CASS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ECHO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>FREJA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>GENJI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HANZO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>JUNK</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>PHARAH</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>REAPER</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SOJ</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SOLDIER</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SOMBRA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SYM</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>TORB</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>TRACER</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>VENTURE</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>WIDOW</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="AddSupp1">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>120</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>ANA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BAP</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BRIG</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ILLARI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>JUNO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KIRIKO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LIFEWEAVER</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LUCIO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MERCY</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MOIRA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>WUYANG</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ZEN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="AddSupp2">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>120</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>ANA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BAP</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BRIG</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ILLARI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>JUNO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KIRIKO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LIFEWEAVER</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LUCIO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MERCY</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MOIRA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>WUYANG</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ZEN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="AddTank">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>120</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>DVA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>DOOM</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HAZ</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>JQ</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MAUGA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ORI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RAM</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>REIN</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HOG</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SIG</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>WINSTON</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BALL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ZARYA</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QPushButton" name="AddComp">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>160</y>
+        <width>75</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ADD COMP</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="AddMap">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>80</y>
+        <width>121</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>ANTARCTIC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BUSAN</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ILIOS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LIJANG</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>NEPAL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>OASIS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SAMOA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>CIRCUIT</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>DORADO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HAVANA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>JUNKERTOWN</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RIALTO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ROUTE66</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SHAMBALI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>GIB</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>AATLIS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>NEW JUNK CITY</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SURAVASA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BLIZZARD WORLD</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EICHENWALDE</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HOLLYWOOD</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KING'S ROW</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MIDTOWN</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>NUMBANI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>PARAISO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>COLOSSEO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ESPERANCA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>NEW QUEEN STREET</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RUNASAPI</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="SavedComp">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>200</y>
+        <width>161</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>SAVED COMP</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
     </widget>
@@ -790,12 +1409,157 @@
      <widget class="QComboBox" name="EditMapSel">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>240</x>
         <y>90</y>
-        <width>151</width>
+        <width>121</width>
         <height>22</height>
        </rect>
       </property>
+      <item>
+       <property name="text">
+        <string>ANTARCTIC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BUSAN</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ILIOS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LIJANG</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>NEPAL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>OASIS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SAMOA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>CIRCUIT</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>DORADO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HAVANA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>JUNKERTOWN</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RIALTO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ROUTE66</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SHAMBALI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>GIB</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>AATLIS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>NEW JUNK CITY</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SURAVASA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BLIZZARD WORLD</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EICHENWALDE</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HOLLYWOOD</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KING'S ROW</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MIDTOWN</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>NUMBANI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>PARAISO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>COLOSSEO</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ESPERANCA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>NEW QUEEN STREET</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RUNASAPI</string>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="CreateTeamPage">

@@ -52,14 +52,21 @@ void MainWindow::on_EditTeam_clicked()
 {
     QString temp;
 
+    ui->EditTeamSel->blockSignals(true);
+    ui->EditCompSel->blockSignals(true);
     qDebug() << "Start\n";
     ui->Pages->setCurrentIndex(3);
     ui->EditTeamSel->clear();
+    ui->EditCompSel->clear();
     for (size_t i = 0; i < teams.size(); i++)
     {
         temp.assign(teams[i]->getName());
         ui->EditTeamSel->addItem(temp);
     }
+    ui->EditTeamSel->blockSignals(false);
+    ui->EditCompSel->blockSignals(false);
+    ui->EditTeamSel->currentIndexChanged(0);
+    ui->EditCompSel->setCurrentIndex(0);
 }
 
 void MainWindow::on_ViewStats_clicked()
@@ -198,6 +205,7 @@ void MainWindow::on_EditTeamSel_currentIndexChanged(int index)
 {
     QString temp;
 
+    ui->EditCompSel->clear();
     ui->EditCompSel->blockSignals(true);
     qDebug() << teams[index]->getCompAmt() << " amount\n";
     for (size_t i = 0; i < teams[index]->getCompAmt(); i++)
@@ -207,6 +215,7 @@ void MainWindow::on_EditTeamSel_currentIndexChanged(int index)
         ui->EditCompSel->addItem(temp);
     }
     ui->EditCompSel->blockSignals(false);
+    ui->EditCompSel->currentIndexChanged(0);
 }
 
 
@@ -217,39 +226,66 @@ void MainWindow::on_EditCompSel_currentIndexChanged(int index)
     bool    supp1 = false;
     string  *comp;
 
+    if (index < 0)
+        return ;
+    ui->EditTankSel->blockSignals(true);
+    ui->EditDps1Sel->blockSignals(true);
+    ui->EditDps2Sel->blockSignals(true);
+    ui->EditSupp1Sel->blockSignals(true);
+    ui->EditSupp2Sel->blockSignals(true);
     comp = teams[ui->EditTeamSel->currentIndex()]->getComp(index);
+    if (comp == NULL)
+    {
+        qDebug() << "NULL COMP\n";
+         return ;
+    }
     for (size_t i = 0; i < 6; i++)
     {
-        auto it = ::find(_heroes.begin(), _heroes.end(), comp[index]);
+        auto it = ::find(_heroes.begin(), _heroes.end(), comp[i]);
         if (it == _heroes.end())
         {
-            if (::find(_maps.begin(), _maps.end(), comp[index]) != _maps.end())
-
+            auto map_it = ::find(_maps.begin(), _maps.end(), comp[i]);
+            if (map_it == _maps.end())
+            {
+                qDebug() << "Invalid input?" << comp[i] << "\n";
+                continue ;
+            }
+            else
+            {
+                ui->EditMapSel->setCurrentIndex(::distance(_maps.begin(), map_it));
+                continue;
+            }
         }
         heroIndex = ::distance(_heroes.begin(), it);
         if (heroIndex < 13)
             ui->EditTankSel->setCurrentIndex(heroIndex);
-        else if (heroIndex < 33 && !dps1)
+        else if (heroIndex < 32 && !dps1)
         {
-            ui->EditDps1Sel->setCurrentIndex(heroIndex);
+            ui->EditDps1Sel->setCurrentIndex(heroIndex - 13);
             dps1 = true;
         }
-        else if (heroIndex < 33)
+        else if (heroIndex < 32)
         {
-            ui->EditDps2Sel->setCurrentIndex(heroIndex);
+            ui->EditDps2Sel->setCurrentIndex(heroIndex - 13);
             dps1 = false;
         }
         else if (!supp1)
         {
-            ui->EditSupp1Sel->setCurrentIndex(heroIndex);
+            ui->EditSupp1Sel->setCurrentIndex(heroIndex - 32);
             supp1 = true;
         }
         else
         {
-            ui->EditSupp2Sel->setCurrentIndex(heroIndex);
+            ui->EditSupp2Sel->setCurrentIndex(heroIndex - 32);
             supp1 = false;
         }
     }
+    delete [] comp;
+    ui->EditTankSel->blockSignals(false);
+    ui->EditDps1Sel->blockSignals(false);
+    ui->EditDps2Sel->blockSignals(false);
+    ui->EditSupp1Sel->blockSignals(false);
+    ui->EditSupp2Sel->blockSignals(false);
 }
 
 
@@ -297,5 +333,51 @@ void MainWindow::on_EditSupp2Sel_currentIndexChanged(int index)
 void MainWindow::on_EditCompSel_activated(int index)
 {
 
+}
+
+
+void MainWindow::on_AddCompMenu_clicked()
+{
+    QString teams_list;
+    string  str_teams;
+    ui->Pages->setCurrentIndex(2);
+    ui->TeamSelectStats->blockSignals(true);
+    ui->TeamSelectStats->clear();
+    for (size_t i = 0; i < teams.size(); i++)
+    {
+        str_teams = teams[i]->getName() + "\n";
+        teams_list.assign(str_teams);
+        ui->TeamSelectStats->addItem(teams_list);
+    }
+    ui->TeamSelectStats->blockSignals(false);
+}
+
+
+void MainWindow::on_AddComp_clicked()
+{
+    QString qname = ui->teamName->text();
+    string  name = qname.toStdString();
+    string  heroes[6];
+    int tank = ui->AddTank->currentIndex();
+    int dps1 = ui->AddDps1->currentIndex();
+    int dps2 = ui->AddDps2->currentIndex();
+    int supp1 = ui->AddSupp1->currentIndex();
+    int supp2 = ui->AddSupp2->currentIndex();
+    int map = ui->AddMap->currentIndex();
+    int team = ui->AddTeamSel->currentIndex();
+
+    heroes[0] = "TANK:" + _heroes[tank];
+    heroes[1] = "DPS1:" + _heroes[dps1 + 13];
+    heroes[2] = "DPS2:" + _heroes[dps2 + 13];
+    heroes[3] = "SUPP1:" + _heroes[supp1 + 32];
+    heroes[4] = "SUPP2:" + _heroes[supp2 + 32];
+    heroes[5] = "MAP:" + _maps[map];
+    teams[team]->addComp(heroes);
+    ui->SavedComp->show();
+    auto lambda = ui->AddComp;
+    QTimer::singleShot(5000, this, [this, lambda]()
+    {
+        ui->SavedComp->hide();
+    });
 }
 
