@@ -278,7 +278,7 @@ void	Team::saveTeam()
 
 	if (!team.is_open())
 	{
-		std::cerr << HIRED << "Unable to open/create file: " << strerror(errno) << "\n";
+        std::cerr << HIRED << "Unable to open file: " << strerror(errno) << "\n";
 		return ;
 	}
 	for (size_t i = 0; i < _teamComps.size(); i++)

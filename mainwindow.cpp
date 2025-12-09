@@ -381,3 +381,41 @@ void MainWindow::on_AddComp_clicked()
     });
 }
 
+
+void MainWindow::on_EditMapSel_currentIndexChanged(int index)
+{
+    EditComp();
+}
+
+
+void MainWindow::on_DeleteTeam_clicked()
+{
+    ui->Pages->setCurrentIndex(5);
+    QString teams_list;
+    string  str_teams;
+
+    ui->DelTeamSel->blockSignals(true);
+    ui->DelTeamSel->clear();
+    ui->DelConfirm->hide();
+    for (size_t i = 0; i < teams.size(); i++)
+    {
+        str_teams = teams[i]->getName() + "\n";
+        teams_list.assign(str_teams);
+        ui->DelTeamSel->addItem(teams_list);
+    }
+    ui->DelTeamSel->blockSignals(false);
+}
+
+
+void MainWindow::on_DelButton_clicked()
+{
+    ui->DelConfirm->show();
+}
+
+
+void MainWindow::on_DelConfirm_accepted()
+{
+    teams.erase(teams.begin() + ui->DelTeamSel->currentIndex());
+    ui->DelConfirm->hide();
+}
+

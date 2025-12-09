@@ -66,6 +66,14 @@ private slots:
 
     void on_AddComp_clicked();
 
+    void on_EditMapSel_currentIndexChanged(int index);
+
+    void on_DeleteTeam_clicked();
+
+    void on_DelButton_clicked();
+
+    void on_DelConfirm_accepted();
+
 private:
     Ui::MainWindow *ui;
 };
