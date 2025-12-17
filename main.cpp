@@ -7,7 +7,7 @@ void loadTeams(vector<Team *> &teams);
 
 int main(int argc, char *argv[])
 {
-
+    loadTeams(teams);
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
@@ -28,13 +28,14 @@ void loadTeams(vector<Team *> &teams)
 {
     ifstream		save;
     string			team;
+    string          name;
     string			heroes[6];
     string			hero;
     unsigned int	i = 0;
 
     save.open(SAVEDATA);
     if (!save.is_open())
-        std::cerr << HIRED << "Unable to open/create save file\n" << RESET;
+        qDebug() << HIRED << "Unable to open/create save file\n" << RESET;
     while (getline(save, team))
     {
         ifstream teamData(team);
@@ -43,7 +44,9 @@ void loadTeams(vector<Team *> &teams)
             std::cerr << HIRED << "Unable to load team data from file: " << team << "\n" << RESET;
             continue;
         }
-        teams.push_back(new Team(team.substr(team.find_last_of("/") + 1, team.find_last_of("."))));
+        name = team.substr(team.find_last_of("/") + 1);
+        name = name.substr(0, name.find("."));
+        teams.push_back(new Team(name));
         while (getline(teamData, hero))
         {
             heroes[i] = hero;

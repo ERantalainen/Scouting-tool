@@ -134,10 +134,10 @@ void MainWindow::on_saveteam_clicked()
     int map = ui->MapSelect->currentIndex();
 
     heroes[0] = "TANK:" + _heroes[tank];
-    heroes[1] = "DPS1:" + _heroes[dps1 + 13];
-    heroes[2] = "DPS2:" + _heroes[dps2 + 13];
-    heroes[3] = "SUPP1:" + _heroes[supp1 + 32];
-    heroes[4] = "SUPP2:" + _heroes[supp2 + 32];
+    heroes[1] = "DPS1:" + _heroes[dps1 + TANKAMT];
+    heroes[2] = "DPS2:" + _heroes[dps2 + TANKAMT];
+    heroes[3] = "SUPP1:" + _heroes[supp1 + TANKAMT + DPSAMT];
+    heroes[4] = "SUPP2:" + _heroes[supp2 + TANKAMT + DPSAMT];
     heroes[5] = "MAP:" + _maps[map];
     for (size_t i = 0; i < teams.size(); i++)
     {
@@ -188,16 +188,11 @@ void MainWindow::on_StatsMap_currentIndexChanged(int index)
     }
     stats_str = teams[ui->TeamSelectStats->currentIndex()]->retMapStats(index - 1);
     qDebug() << stats_str << "\n";
-    comp.assign(stats_str.substr(stats_str.find("\n") + 1));
-    stats.assign(stats_str.substr(0, stats_str.find("\n") + 1));
-    stats.append("\n");
+    comp.assign(stats_str);
     comp.append("\n");
     ui->StatsInfo->setTextColor(Qt::black);
     ui->StatsInfo->setFontWeight(QFont::Bold);
     ui->StatsInfo->setText(comp);
-    ui->StatsInfo->setTextColor(Qt::red);
-    ui->StatsInfo->setFontWeight(QFont::Normal);
-    ui->StatsInfo->insertPlainText(stats);
 }
 
 
@@ -257,26 +252,26 @@ void MainWindow::on_EditCompSel_currentIndexChanged(int index)
             }
         }
         heroIndex = ::distance(_heroes.begin(), it);
-        if (heroIndex < 13)
+        if (heroIndex < TANKAMT)
             ui->EditTankSel->setCurrentIndex(heroIndex);
-        else if (heroIndex < 32 && !dps1)
+        else if (heroIndex < TANKAMT + DPSAMT && !dps1)
         {
-            ui->EditDps1Sel->setCurrentIndex(heroIndex - 13);
+            ui->EditDps1Sel->setCurrentIndex(heroIndex - TANKAMT);
             dps1 = true;
         }
-        else if (heroIndex < 32)
+        else if (heroIndex < TANKAMT + DPSAMT)
         {
-            ui->EditDps2Sel->setCurrentIndex(heroIndex - 13);
+            ui->EditDps2Sel->setCurrentIndex(heroIndex - TANKAMT);
             dps1 = false;
         }
         else if (!supp1)
         {
-            ui->EditSupp1Sel->setCurrentIndex(heroIndex - 32);
+            ui->EditSupp1Sel->setCurrentIndex(heroIndex - (TANKAMT + DPSAMT));
             supp1 = true;
         }
         else
         {
-            ui->EditSupp2Sel->setCurrentIndex(heroIndex - 32);
+            ui->EditSupp2Sel->setCurrentIndex(heroIndex - (TANKAMT + DPSAMT));
             supp1 = false;
         }
     }
@@ -341,15 +336,13 @@ void MainWindow::on_AddCompMenu_clicked()
     QString teams_list;
     string  str_teams;
     ui->Pages->setCurrentIndex(2);
-    ui->TeamSelectStats->blockSignals(true);
-    ui->TeamSelectStats->clear();
+    ui->AddTeamSel->clear();
     for (size_t i = 0; i < teams.size(); i++)
     {
         str_teams = teams[i]->getName() + "\n";
         teams_list.assign(str_teams);
-        ui->TeamSelectStats->addItem(teams_list);
+        ui->AddTeamSel->addItem(teams_list);
     }
-    ui->TeamSelectStats->blockSignals(false);
 }
 
 
@@ -367,10 +360,10 @@ void MainWindow::on_AddComp_clicked()
     int team = ui->AddTeamSel->currentIndex();
 
     heroes[0] = "TANK:" + _heroes[tank];
-    heroes[1] = "DPS1:" + _heroes[dps1 + 13];
-    heroes[2] = "DPS2:" + _heroes[dps2 + 13];
-    heroes[3] = "SUPP1:" + _heroes[supp1 + 32];
-    heroes[4] = "SUPP2:" + _heroes[supp2 + 32];
+    heroes[1] = "DPS1:" + _heroes[dps1 + TANKAMT];
+    heroes[2] = "DPS2:" + _heroes[dps2 + TANKAMT];
+    heroes[3] = "SUPP1:" + _heroes[supp1 + TANKAMT + DPSAMT];
+    heroes[4] = "SUPP2:" + _heroes[supp2 + TANKAMT + DPSAMT];
     heroes[5] = "MAP:" + _maps[map];
     teams[team]->addComp(heroes);
     ui->SavedComp->show();

@@ -158,35 +158,35 @@ void	Team::sortComp(int i)
     if (i < 0 || i > _teamComps.size())
         return ;
 	auto itA = _teamComps[i].begin();
-	if (itA->first != "MAP")
+    while (itA->first != "MAP")
 	{
 		auto itB = _teamComps[i].find("MAP");
 		if (itB != _teamComps[i].end())
 			std::swap(itA, itB);
 	}
 	itA++;
-	if (itA->first != "TANK")
+    while (itA->first != "TANK")
 	{
 		auto itB = _teamComps[i].find("TANK");
 		if (itB != _teamComps[i].end())
 			std::swap(itA, itB);
 	}
 	itA++;
-	if (itA->first != "DPS1")
+    while (itA->first != "DPS1")
 	{
 		auto itB = _teamComps[i].find("DPS1");
 		if (itB != _teamComps[i].end())
 			std::swap(itA, itB);
 	}
 	itA++;
-	if (itA->first != "DPS2")
+    while (itA->first != "DPS2")
 	{
 		auto itB = _teamComps[i].find("DPS2");
 		if (itB != _teamComps[i].end())
 			std::swap(itA, itB);
 	}
 	itA++;
-	if (itA->first != "SUPP1")
+    while (itA->first != "SUPP1")
 	{
 		auto itB = _teamComps[i].find("SUPP1");
 		if (itB != _teamComps[i].end())
@@ -231,11 +231,11 @@ void	Team::newTeam()
 				break ;
 			}
 		}
-		if (index < 13)
+        if (index < TANKAMT)
 		{
 			_teamComps[_comps - 1]["TANK"] = input;
 		}
-		else if (index > 12 && index < 32)
+        else if (index > TANKAMT - 1 && index < DPSAMT)
 		{
 			if (_dps == false)
 			{
@@ -361,11 +361,11 @@ void	Team::addHeroes(size_t i)
 			break ;
 		}
 	}
-	if (index < 13)
+    if (index < TANKAMT)
 	{
 		_teamComps[i]["TANK"] = input;
 	}
-	else if (index > 12 && index < 32)
+    else if (index > TANKAMT - 1 && index < DPSAMT)
 	{
 		if (_dps == false)
 		{
@@ -458,7 +458,7 @@ void	Team::printAllComps()
 	}
 	std::cout << HIGREEN << "Overall: " << RESET << "\n";
 	double	percentage = 0;
-	for (size_t i = 0; i < 13; i++)
+    for (size_t i = 0; i < TANKAMT; i++)
 	{
 		if (_heroCount[i] == 0)
 			continue ;
@@ -468,7 +468,7 @@ void	Team::printAllComps()
 		if (_heroCount[i] > _comps / 3)
 			mostCommon.push_back(make_pair(percentage, i));
 	}
-	for (size_t i = 13; i < _heroes.size(); i++)
+    for (size_t i = TANKAMT; i < _heroes.size(); i++)
 	{
 		if (_heroCount[i] == 0)
 			continue ;
@@ -498,31 +498,31 @@ string  Team::retStats()
     }
     result << "Overall: " << "\n";
     double	percentage = 0;
-    for (size_t i = 0; i < 13; i++)
+    for (size_t i = 0; i < TANKAMT; i++)
     {
         if (_heroCount[i] == 0)
             continue ;
-        result << "	" << _heroes[i] << " picked: " << _heroCount[i];
+        result << " " << _heroes[i] << " picked: " << _heroCount[i];
         percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
         result << " (" << setprecision(3) << percentage << "%)\n";
         if (_heroCount[i] > _comps / 3)
             mostCommon.push_back(make_pair(percentage, i));
     }
-    for (size_t i = 13; i < _heroes.size(); i++)
+    for (size_t i = TANKAMT; i < _heroes.size(); i++)
     {
         if (_heroCount[i] == 0)
             continue ;
-        result << "	" << _heroes[i] << " picked: " << _heroCount[i];
+        result << " " << _heroes[i] << " picked: " << _heroCount[i];
         percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
         result << " (" << setprecision(3) << percentage << "%)\n";
         if (_heroCount[i] > (_comps / 3))
             mostCommon.push_back(make_pair(percentage, i));
     }
-    result << "Most common: \n";
+    result << "\nMost common: \n";
     sort(mostCommon.begin(), mostCommon.end());
     for (size_t i = 0; i < mostCommon.size(); i++)
     {
-        result << setw(10) << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
+        result << " " << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
     }
     return result.str();
 }
@@ -611,15 +611,14 @@ string  *Team::getComp(size_t i)
     }
     return comp;
 }
-
 void    Team::changeComp(int heroes[5], int index)
 {
     qDebug() << heroes << " " << index << "\n";
     _teamComps[index]["TANK"] = _heroes[heroes[0]];
-    _teamComps[index]["DPS1"] = _heroes[heroes[1] + 13];
-    _teamComps[index]["DPS2"] = _heroes[heroes[2] + 13];
-    _teamComps[index]["SUPP1"] = _heroes[heroes[3] + 32];
-    _teamComps[index]["SUPP2"] = _heroes[heroes[4] + 32];
+    _teamComps[index]["DPS1"] = _heroes[heroes[1] + TANKAMT];
+    _teamComps[index]["DPS2"] = _heroes[heroes[2] + TANKAMT];
+    _teamComps[index]["SUPP1"] = _heroes[heroes[3] + TANKAMT + DPSAMT];
+    _teamComps[index]["SUPP2"] = _heroes[heroes[4] + TANKAMT + DPSAMT];
     sortComp(index);
     saveTeam();
     updateTime();

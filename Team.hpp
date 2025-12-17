@@ -17,6 +17,10 @@
 using namespace std;
 
 #define SAVEDATA	"./data/save.dat"
+#define TANKAMT 13
+#define DPSAMT 20
+#define SUPPAMT 12
+#define TOTAL 45
 
 enum	heroes
 {
@@ -53,6 +57,7 @@ enum	heroes
 	TRACER,
 	VENTURE,
 	WIDOW,
+    VENDETTA,
 	ANA,
 	BAP,
 	BRIG,
@@ -70,7 +75,7 @@ enum	heroes
 const 	vector<string>	_heroes = { "DVA", "DOOM", "HAZ", "JQ", "MAUGA", "ORI", "RAM", "REIN",
                                 "HOG", "SIG", "WINSTON", "BALL", "ZARYA", "ASHE", "BASTION", "CASS", "ECHO",
                                 "FREJA", "GENJI", "HANZO", "JUNK", "MEI", "PHARAH", "REAPER", "SOJ", "SOLDIER",
-                                "SOMBRA", "SYM", "TORB", "TRACER", "VENTURE", "WIDOW", "ANA", "BAP",
+                                "SOMBRA", "SYM", "TORB", "TRACER", "VENTURE", "VENDETTA", "WIDOW", "ANA", "BAP",
                                 "BRIG", "ILLARI", "JUNO", "KIRI", "LW", "LUCIO", "MERCY", "MOIRA", "WU", "ZEN"};
 const	vector<string>	_maps = { "ANTARCTIC", "BUSAN", "ILIOS", "LIJANG", "NEPAL",
                               "OASIS", "SAMOA", "CIRCUIT", "DORADO", "HAVANA", "JUNKERTOWN", "RIALTO", "ROUTE",
