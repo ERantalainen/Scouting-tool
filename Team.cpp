@@ -527,6 +527,50 @@ string  Team::retStats()
     return result.str();
 }
 
+QString  Team::retQstats()
+{
+    vector<pair<double, int>>	mostCommon;
+    stringstream result;
+    calcStats();
+    for (size_t i = 0; i < _teamComps.size(); i++)
+    {
+        result << returnComp(i);
+        result << "\n";
+    }
+    result << "Overall: " << "\n";
+    double	percentage = 0;
+    for (size_t i = 0; i < 13; i++)
+    {
+        if (_heroCount[i] == 0)
+            continue ;
+
+        result << "	" << _heroes[i] << " picked: " << _heroCount[i] << "<img 'src=file:./icons/Icon-" + _heroes[i] + ".webp' alt = ''>";
+        percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
+        result << " (" << setprecision(3) << percentage << "%)\n";
+        if (_heroCount[i] > _comps / 3)
+            mostCommon.push_back(make_pair(percentage, i));
+    }
+    for (size_t i = 13; i < _heroes.size(); i++)
+    {
+        if (_heroCount[i] == 0)
+            continue ;
+        result << "	" << _heroes[i] << " picked: " << _heroCount[i] << "<img src=\"./icons/Icon-" + _heroes[i] + ".webp>\"";
+        percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
+        result << " (" << setprecision(3) << percentage << "%)\n";
+        if (_heroCount[i] > (_comps / 3))
+            mostCommon.push_back(make_pair(percentage, i));
+    }
+    result << "Most common: \n";
+    sort(mostCommon.begin(), mostCommon.end());
+    for (size_t i = 0; i < mostCommon.size(); i++)
+    {
+        result << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
+    }
+    QString res;
+    res.assign(result.str());
+    return res;
+}
+
 void	Team::printTanks()
 {
 		for (size_t i = 0; i < _teamComps.size(); i++)

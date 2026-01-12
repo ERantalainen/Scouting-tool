@@ -13,9 +13,11 @@
 #include <QDebug>
 #include <QSignalBlocker>
 #include <QTimer>
+#include <QTextStream>
 
 using namespace std;
 
+#define ICONS "./icons/"
 #define SAVEDATA	"./data/save.dat"
 #define TANKAMT 13
 #define DPSAMT 20
@@ -104,6 +106,7 @@ class Team
 		void	getStats();
         size_t     getCompAmt();
         string	retStats();
+        QString retQstats(QTextEdit *info);
 		void	resetStats();
 		void	getHeroes();
 		void	addHeroes(size_t i);

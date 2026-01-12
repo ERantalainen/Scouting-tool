@@ -27,24 +27,6 @@ void MainWindow::on_CreateTeam_clicked()
         mapName.assign(_maps[i]);
         ui->MapSelect->addItem(mapName);
     }
-    // string input;
-    // std::cout << RESET << BCYAN << "Choose team name\n" << RESET;
-    // std::cin >> input;
-    // teams.push_back(new Team(input));
-    // teams[teams.size() - 1]->newTeam();
-    // while (1)
-    // {
-    //     std::cout << HIWHITE << "Add more comps? Y/n:" << RESET;
-    //     std::cin >> input;
-    //     std::transform(input.begin(), input.end(), input.begin(), ::toupper);
-    //     if (input == "Y")
-    //         teams[teams.size() - 1]->newTeam();
-    //     else
-    //     {
-    //         std::cout << (*(teams.end())) << "\n";
-    //         break ;
-    //     }
-    // }
 }
 
 
@@ -166,9 +148,10 @@ void MainWindow::on_TeamSelectStats_currentIndexChanged(int index)
     string  stats_str;
 
     ui->StatsMap->setCurrentIndex(0);
-    stats_str = teams[index]->retStats();
-    stats.assign(stats_str);
-    ui->StatsInfo->setText(stats);
+ //   stats_str = teams[index]->retStats();
+   // stats.assign(stats_str);
+    stats = teams[index]->retQstats();
+    ui->StatsInfo->insertHtml(stats);
 }
 
 
