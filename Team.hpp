@@ -79,10 +79,19 @@ const 	vector<string>	_heroes = { "DVA", "DOOM", "HAZ", "JQ", "MAUGA", "ORI", "R
                                 "FREJA", "GENJI", "HANZO", "JUNK", "MEI", "PHARAH", "REAPER", "SOJ", "SOLDIER",
                                 "SOMBRA", "SYM", "TORB", "TRACER", "VENTURE", "VENDETTA", "WIDOW", "ANA", "BAP",
                                 "BRIG", "ILLARI", "JUNO", "KIRI", "LW", "LUCIO", "MERCY", "MOIRA", "WU", "ZEN"};
-const	vector<string>	_maps = { "ANTARCTIC", "BUSAN", "ILIOS", "LIJANG", "NEPAL",
-                              "OASIS", "SAMOA", "CIRCUIT", "DORADO", "HAVANA", "JUNKERTOWN", "RIALTO", "ROUTE",
+const	vector<string>	_maps = { "ANTARCTIC - ICEBREAKER", "ANTARCTIC - LABS", "ANTARCTIC - SUBLEVEL",
+                              "BUSAN - DOWNTOWN", "BUSAN - SANCTUARY", "BUSAN - MEKABASE",
+                              "ILIOS - LIGHTHOUSE", "ILIOS - WELL", "ILIOS - RUINS",
+                              "LIJANG - NIGHTMARKET", "LIJANG - GARDENS", "LIJANG - CONTROL CENTER"
+                              "NEPAL - VILLAGE", "NEPAL - SHRINE", "NEPAL - SANCTUM",
+                              "OASIS - CITY CENTER", "OASIS - GARDENS", "OASIS - UNIVERSITY",
+                              "SAMOA - BEACH", "SAMOA - DOWNTOWN", "SAMOA - VOLCANO", "CIRCUIT",
+                              "DORADO", "HAVANA", "JUNKERTOWN", "RIALTO", "ROUTE",
                               "SHAMBALI", "GIB", "AATLIS", "NEW JUNK CITY", "SURAVASA", "BLIZZ", "EICH", "HOLLYWOOD",  "KR",
                               "MIDTOWN", "NUMBANI", "PARAISO", "COLOSSEO", "ESPERANCA", "NQS", "RUNASAPI" };
+
+#define MAPAMT _maps.size()
+
 
 class Team
 {
