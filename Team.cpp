@@ -532,11 +532,11 @@ QString  Team::retQstats(QTextEdit *info)
     vector<pair<double, int>>	mostCommon;
 	stringstream	temp;
     calcStats();
-    for (size_t i = 0; i < _teamComps.size(); i++)
-    {
-        info->insertPlainText(returnComp(i));
-        info->insertPlainText("\n");
-    }
+    // for (size_t i = 0; i < _teamComps.size(); i++)
+    // {
+    //     info->insertPlainText(returnComp(i));
+    //     info->insertPlainText("\n");
+    // }
     info->insertPlainText("Overall: \n");
     double	percentage = 0;
     for (size_t i = 0; i < 13; i++)
