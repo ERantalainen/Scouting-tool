@@ -562,7 +562,7 @@ QString  Team::retQstats(QTextEdit *info)
         temp << "	" << _heroes[i] << " picked: " << _heroCount[i]
 		info->insertPlainText(temp.str());
 		temp.flush();
-		temp << "<img src='./icons/Icon-" + _heroes[i] + ".webp'/>";
+		temp << "<img src='file:./icons/Icon-" + _heroes[i] + ".webp'/>";
 		info->insertHtml(temp.str());
 		temp.flush();
         percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
