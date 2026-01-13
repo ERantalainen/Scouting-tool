@@ -527,26 +527,31 @@ string  Team::retStats()
     return result.str();
 }
 
-QString  Team::retQstats()
+QString  Team::retQstats(QTextEdit *info)
 {
     vector<pair<double, int>>	mostCommon;
-    stringstream result;
+	stringstream	temp;
     calcStats();
     for (size_t i = 0; i < _teamComps.size(); i++)
     {
-        result << returnComp(i);
-        result << "\n";
+        info->insertPlainText(returnComp(i));
+        info->insertPlainText("\n");
     }
-    result << "Overall: " << "\n";
+    info->insertPlainText("Overall: \n");
     double	percentage = 0;
     for (size_t i = 0; i < 13; i++)
     {
         if (_heroCount[i] == 0)
             continue ;
 
-        result << "	" << _heroes[i] << " picked: " << _heroCount[i] << "<img src='file:./icons/Icon-" + _heroes[i] + ".webp' alt = ''/>";
+        temp << "	" << _heroes[i] << " picked: " << _heroCount[i];
+		info->insertPlainText(temp.str());
+		temp.flush();
+		info->insertHtml("<img src='file:./icons/Icon-" + _heroes[i] + ".webp' alt = ''/>");
         percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
-        result << " (" << setprecision(3) << percentage << "%)\n";
+        temp << " (" << setprecision(3) << percentage << "%)\n";
+		info->insertPlainText(temp.str());
+		temp.flush();
         if (_heroCount[i] > _comps / 3)
             mostCommon.push_back(make_pair(percentage, i));
     }
@@ -554,19 +559,28 @@ QString  Team::retQstats()
     {
         if (_heroCount[i] == 0)
             continue ;
-        result << "	" << _heroes[i] << " picked: " << _heroCount[i] << "<img src=\"./icons/Icon-" + _heroes[i] + ".webp>\"";
+        temp << "	" << _heroes[i] << " picked: " << _heroCount[i]
+		info->insertPlainText(temp.str());
+		temp.flush();
+		temp << "<img src='./icons/Icon-" + _heroes[i] + ".webp'/>";
+		info->insertHtml(temp.str());
+		temp.flush();
         percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
-        result << " (" << setprecision(3) << percentage << "%)\n";
+        temp << " (" << setprecision(3) << percentage << "%)\n";
+		info->insertPlainText(temp.str());
+		temp.flush();
         if (_heroCount[i] > (_comps / 3))
             mostCommon.push_back(make_pair(percentage, i));
     }
-    result << "Most common: \n";
+    temp << "Most common: \n";
     sort(mostCommon.begin(), mostCommon.end());
     for (size_t i = 0; i < mostCommon.size(); i++)
     {
-        result << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
+        temp << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
     }
     QString res;
+	info->insertPlainText(temp.str());
+	temp.flush();
     res.assign(result.str());
     return res;
 }
