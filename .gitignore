@@ -48,6 +48,7 @@ CMakeLists.txt.user*
 
 # Visual Studio generated files
 *.ib_pdb_index
+.vcsode
 *.idb
 *.ilk
 *.pdb
@@ -80,3 +81,7 @@ CMakeLists.txt.user*
 .rcc/
 .uic/
 /build*/
+.vscode/c_cpp_properties.json
+/data/*
+.vscode/launch.json
+.gitignore
