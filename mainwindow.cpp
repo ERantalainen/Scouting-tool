@@ -56,7 +56,8 @@ void MainWindow::on_ViewStats_clicked()
 {
     QString teams_list;
     string  str_teams;
-
+    
+    ui->StatsInfo->clear();
     for (size_t i = 0; i < teams.size(); i++)
     {
         str_teams = teams[i]->getName() + "\n";
@@ -151,8 +152,7 @@ void MainWindow::on_TeamSelectStats_currentIndexChanged(int index)
     ui->StatsMap->setCurrentIndex(0);
  //   stats_str = teams[index]->retStats();
    // stats.assign(stats_str);
-    stats = teams[index]->retQstats();
-    ui->StatsInfo->insertHtml(stats);
+    stats = teams[index]->retQstats(ui->StatsInfo);
 }
 
 

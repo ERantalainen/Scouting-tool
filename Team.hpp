@@ -14,6 +14,8 @@
 #include <QSignalBlocker>
 #include <QTimer>
 #include <QTextStream>
+#include <QTextEdit>
+#include <QfileInfo>
 
 using namespace std;
 

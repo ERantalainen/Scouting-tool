@@ -23,7 +23,7 @@ void	Team::addComp(string heroes[6])
 		role = heroes[i].substr(0, heroes[i].find(":"));
 		_teamComps[_comps - 1][role] = heroes[i].substr(heroes[i].find(":") + 1);
 	}
-    saveTeam();
+	saveTeam();
 }
 
 Team::Team()
@@ -58,14 +58,14 @@ Team::Team(string name) : _name(name)
 	ofstream		test;
 	string		check;
 
-    _save = "./data/" + _name + ".txt";
+	_save = "./data/" + _name + ".txt";
 	filesystem::create_directory("./data");
 	save.open(SAVEDATA);
 	if (!save.is_open())
 	{
-        std::cerr << "Unable to open/create save file\n";
+		std::cerr << "Unable to open/create save file\n";
 	}
-    std::cout << "created team: " << _name << "\n";
+	std::cout << "created team: " << _name << "\n";
 	auto time = chrono::system_clock::now();
 	_created = chrono::system_clock::to_time_t(time);
 	_updated = _created;
@@ -155,38 +155,38 @@ void	Team::updateTime()
 */
 void	Team::sortComp(int i)
 {
-    if (i < 0 || i > _teamComps.size())
-        return ;
+	if (i < 0 || i > _teamComps.size())
+		return ;
 	auto itA = _teamComps[i].begin();
-    while (itA->first != "MAP")
+	while (itA->first != "MAP")
 	{
 		auto itB = _teamComps[i].find("MAP");
 		if (itB != _teamComps[i].end())
 			std::swap(itA, itB);
 	}
 	itA++;
-    while (itA->first != "TANK")
+	while (itA->first != "TANK")
 	{
 		auto itB = _teamComps[i].find("TANK");
 		if (itB != _teamComps[i].end())
 			std::swap(itA, itB);
 	}
 	itA++;
-    while (itA->first != "DPS1")
+	while (itA->first != "DPS1")
 	{
 		auto itB = _teamComps[i].find("DPS1");
 		if (itB != _teamComps[i].end())
 			std::swap(itA, itB);
 	}
 	itA++;
-    while (itA->first != "DPS2")
+	while (itA->first != "DPS2")
 	{
 		auto itB = _teamComps[i].find("DPS2");
 		if (itB != _teamComps[i].end())
 			std::swap(itA, itB);
 	}
 	itA++;
-    while (itA->first != "SUPP1")
+	while (itA->first != "SUPP1")
 	{
 		auto itB = _teamComps[i].find("SUPP1");
 		if (itB != _teamComps[i].end())
@@ -231,11 +231,11 @@ void	Team::newTeam()
 				break ;
 			}
 		}
-        if (index < TANKAMT)
+		if (index < TANKAMT)
 		{
 			_teamComps[_comps - 1]["TANK"] = input;
 		}
-        else if (index > TANKAMT - 1 && index < DPSAMT)
+		else if (index > TANKAMT - 1 && index < DPSAMT)
 		{
 			if (_dps == false)
 			{
@@ -278,7 +278,7 @@ void	Team::saveTeam()
 
 	if (!team.is_open())
 	{
-        std::cerr << HIRED << "Unable to open file: " << strerror(errno) << "\n";
+		std::cerr << HIRED << "Unable to open file: " << strerror(errno) << "\n";
 		return ;
 	}
 	for (size_t i = 0; i < _teamComps.size(); i++)
@@ -319,16 +319,16 @@ void	Team::printComp(size_t i)
 
 string  Team::returnComp(size_t i)
 {
-    stringstream    res;
+	stringstream	res;
 
-    res << "	MAP: " << _teamComps[i]["MAP"]  << "\n";
-    res << "	TANK: " <<  _teamComps[i]["TANK"]  << "\n";
-    res  << "	DPS: " <<  _teamComps[i]["DPS1"] << "\n" ;
-    res  << "	DPS: " <<  _teamComps[i]["DPS2"] << "\n" ;
-    res  << "	SUPP: " <<  _teamComps[i]["SUPP1"] << "\n";
-    res  << "	SUPP: " <<  _teamComps[i]["SUPP2"] << "\n";
+	res << "	MAP: " << _teamComps[i]["MAP"]  << "\n";
+	res << "	TANK: " <<  _teamComps[i]["TANK"]  << "\n";
+	res  << "	DPS: " <<  _teamComps[i]["DPS1"] << "\n" ;
+	res  << "	DPS: " <<  _teamComps[i]["DPS2"] << "\n" ;
+	res  << "	SUPP: " <<  _teamComps[i]["SUPP1"] << "\n";
+	res  << "	SUPP: " <<  _teamComps[i]["SUPP2"] << "\n";
 
-    return res.str();
+	return res.str();
 }
 
 void	Team::addHeroes(size_t i)
@@ -361,11 +361,11 @@ void	Team::addHeroes(size_t i)
 			break ;
 		}
 	}
-    if (index < TANKAMT)
+	if (index < TANKAMT)
 	{
 		_teamComps[i]["TANK"] = input;
 	}
-    else if (index > TANKAMT - 1 && index < DPSAMT)
+	else if (index > TANKAMT - 1 && index < DPSAMT)
 	{
 		if (_dps == false)
 		{
@@ -458,7 +458,7 @@ void	Team::printAllComps()
 	}
 	std::cout << HIGREEN << "Overall: " << RESET << "\n";
 	double	percentage = 0;
-    for (size_t i = 0; i < TANKAMT; i++)
+	for (size_t i = 0; i < TANKAMT; i++)
 	{
 		if (_heroCount[i] == 0)
 			continue ;
@@ -468,7 +468,7 @@ void	Team::printAllComps()
 		if (_heroCount[i] > _comps / 3)
 			mostCommon.push_back(make_pair(percentage, i));
 	}
-    for (size_t i = TANKAMT; i < _heroes.size(); i++)
+	for (size_t i = TANKAMT; i < _heroes.size(); i++)
 	{
 		if (_heroCount[i] == 0)
 			continue ;
@@ -488,108 +488,118 @@ void	Team::printAllComps()
 
 string  Team::retStats()
 {
-    vector<pair<double, int>>	mostCommon;
-    stringstream                result;
-    calcStats();
-    for (size_t i = 0; i < _teamComps.size(); i++)
-    {
-        result << returnComp(i);
-        result << "\n";
-    }
-    result << "Overall: " << "\n";
-    double	percentage = 0;
-    for (size_t i = 0; i < TANKAMT; i++)
-    {
-        if (_heroCount[i] == 0)
-            continue ;
-        result << " " << _heroes[i] << " picked: " << _heroCount[i];
-        percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
-        result << " (" << setprecision(3) << percentage << "%)\n";
-        if (_heroCount[i] > _comps / 3)
-            mostCommon.push_back(make_pair(percentage, i));
-    }
-    for (size_t i = TANKAMT; i < _heroes.size(); i++)
-    {
-        if (_heroCount[i] == 0)
-            continue ;
-        result << " " << _heroes[i] << " picked: " << _heroCount[i];
-        percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
-        result << " (" << setprecision(3) << percentage << "%)\n";
-        if (_heroCount[i] > (_comps / 3))
-            mostCommon.push_back(make_pair(percentage, i));
-    }
-    result << "\nMost common: \n";
-    sort(mostCommon.begin(), mostCommon.end());
-    for (size_t i = 0; i < mostCommon.size(); i++)
-    {
-        result << " " << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
-    }
-    return result.str();
+	vector<pair<double, int>>	mostCommon;
+	stringstream				result;
+	calcStats();
+	for (size_t i = 0; i < _teamComps.size(); i++)
+	{
+		result << returnComp(i);
+		result << "\n";
+	}
+	result << "Overall: " << "\n";
+	double	percentage = 0;
+	for (size_t i = 0; i < TANKAMT; i++)
+	{
+		if (_heroCount[i] == 0)
+			continue ;
+		result << " " << _heroes[i] << " picked: " << _heroCount[i];
+		percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
+		result << " (" << setprecision(3) << percentage << "%)\n";
+		if (_heroCount[i] > _comps / 3)
+			mostCommon.push_back(make_pair(percentage, i));
+	}
+	for (size_t i = TANKAMT; i < _heroes.size(); i++)
+	{
+		if (_heroCount[i] == 0)
+			continue ;
+		result << " " << _heroes[i] << " picked: " << _heroCount[i];
+		percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
+		result << " (" << setprecision(3) << percentage << "%)\n";
+		if (_heroCount[i] > (_comps / 3))
+			mostCommon.push_back(make_pair(percentage, i));
+	}
+	result << "\nMost common: \n";
+	sort(mostCommon.begin(), mostCommon.end());
+	for (size_t i = 0; i < mostCommon.size(); i++)
+	{
+		result << " " << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
+	}
+	return result.str();
 }
 
 QString  Team::retQstats(QTextEdit *info)
 {
-    vector<pair<double, int>>	mostCommon;
+	vector<pair<double, int>>	mostCommon;
+	QString		 conv;
 	stringstream	temp;
-    calcStats();
-    // for (size_t i = 0; i < _teamComps.size(); i++)
-    // {
-    //     info->insertPlainText(returnComp(i));
-    //     info->insertPlainText("\n");
-    // }
-    info->insertPlainText("Overall: \n");
-    double	percentage = 0;
-    for (size_t i = 0; i < 13; i++)
-    {
-        if (_heroCount[i] == 0)
-            continue ;
-
-        temp << "	" << _heroes[i] << " picked: " << _heroCount[i];
-		info->insertPlainText(temp.str());
+	calcStats();
+	// for (size_t i = 0; i < _teamComps.size(); i++)
+	// {
+	//	 info->insertPlainText(returnComp(i));
+	//	 info->insertPlainText("\n");
+	// }
+	info->insertPlainText("Overall: \n");
+	double	percentage = 0;
+	info->acceptRichText();
+	for (size_t i = 0; i < 13; i++)
+	{	
+		if (_heroCount[i] == 0)
+			continue ;
+		temp << "	" << _heroes[i] << " picked: " << _heroCount[i];
+		conv.assign(temp.str());
+		info->setText(conv);
 		temp.flush();
-		info->insertHtml("<img src='file:./icons/Icon-" + _heroes[i] + ".webp' alt = ''/>");
-        percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
-        temp << " (" << setprecision(3) << percentage << "%)\n";
-		info->insertPlainText(temp.str());
+		temp << "<img src='file:./icons/Icon-" << _heroes[i] << ".webp' alt = ''/>";
+		conv.assign(temp.str());
+		info->insertHtml(conv);
 		temp.flush();
-        if (_heroCount[i] > _comps / 3)
-            mostCommon.push_back(make_pair(percentage, i));
-    }
-    for (size_t i = 13; i < _heroes.size(); i++)
-    {
-        if (_heroCount[i] == 0)
-            continue ;
-        temp << "	" << _heroes[i] << " picked: " << _heroCount[i]
-		info->insertPlainText(temp.str());
+		percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
+		temp << " (" << setprecision(3) << percentage << "%)\n";
+		conv.assign(temp.str());
+		info->insertPlainText(conv);
 		temp.flush();
-		temp << "<img src='file:./icons/Icon-" + _heroes[i] + ".webp'/>";
-		info->insertHtml(temp.str());
+		if (_heroCount[i] > _comps / 3)
+			mostCommon.push_back(make_pair(percentage, i));
+	}
+	for (size_t i = 13; i < _heroes.size(); i++)
+	{
+		if (_heroCount[i] == 0)
+			continue ;
+		temp << "	" << _heroes[i] << " picked: " << _heroCount[i];
+		conv.assign(temp.str());
+		info->insertText(conv);
 		temp.flush();
-        percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
-        temp << " (" << setprecision(3) << percentage << "%)\n";
-		info->insertPlainText(temp.str());
+		temp << "<img src='file:./icons/Icon-" << _heroes[i] << ".webp' alt = ''/>";
+		conv.assign(temp.str());
+		info->insertPlainText(conv);
 		temp.flush();
-        if (_heroCount[i] > (_comps / 3))
-            mostCommon.push_back(make_pair(percentage, i));
-    }
-    temp << "Most common: \n";
-    sort(mostCommon.begin(), mostCommon.end());
-    for (size_t i = 0; i < mostCommon.size(); i++)
-    {
-        temp << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
-    }
-    QString res;
-	info->insertPlainText(temp.str());
+		percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
+		temp << " (" << setprecision(3) << percentage << "%)\n";
+		conv.assign(temp.str());
+		info->insertPlainText(conv);
+		temp.flush();
+		if (_heroCount[i] > (_comps / 3))
+			mostCommon.push_back(make_pair(percentage, i));
+	}
+	temp << "Most common: \n";
+	sort(mostCommon.begin(), mostCommon.end());
+	for (size_t i = 0; i < mostCommon.size(); i++)
+	{
+		temp << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
+	}
+	QString res;
+	conv.assign(temp.str());
+	info->insertPlainText(conv);
 	temp.flush();
-    res.assign(result.str());
-    return res;
+	res.assign(temp.str());
+	return res;
 }
 
 void	Team::printTanks()
 {
 		for (size_t i = 0; i < _teamComps.size(); i++)
 	{
-        cout << "	TANK: " << _teamComps[i]["TANK"] << "\n";
+		cout << "	TANK: " << _teamComps[i]["TANK"] << "\n";
 		std::cout << std::endl;
 	}
 }
@@ -629,57 +639,57 @@ void	Team::displayMapStats()
 
 string  Team::retMapStats(int i)
 {
-    string map = _maps[i];
-    unsigned int count = 1;
-    stringstream result;
+	string map = _maps[i];
+	unsigned int count = 1;
+	stringstream result;
 
-    for (size_t i = 0; i < _comps; i++)
-    {
-        qDebug() << _teamComps[i]["MAP"];
-        if (_teamComps[i]["MAP"] == map)
-        {
-            result << "Comp " << count << ":\n";
-            result << " " << _teamComps[i]["TANK"] << "\n";
-            result << " " << _teamComps[i]["DPS1"] << "\n";
-            result << " " << _teamComps[i]["DPS2"] << "\n";
-            result << " " << _teamComps[i]["SUPP1"] << "\n";
-            result << " " << _teamComps[i]["SUPP2"] << "\n\n";
-        }
-        count++;
-    }
-    return result.str();
+	for (size_t i = 0; i < _comps; i++)
+	{
+		qDebug() << _teamComps[i]["MAP"];
+		if (_teamComps[i]["MAP"] == map)
+		{
+			result << "Comp " << count << ":\n";
+			result << " " << _teamComps[i]["TANK"] << "\n";
+			result << " " << _teamComps[i]["DPS1"] << "\n";
+			result << " " << _teamComps[i]["DPS2"] << "\n";
+			result << " " << _teamComps[i]["SUPP1"] << "\n";
+			result << " " << _teamComps[i]["SUPP2"] << "\n\n";
+		}
+		count++;
+	}
+	return result.str();
 }
 
 size_t Team::getCompAmt()
 {
-    return _comps;
+	return _comps;
 }
 
 string  *Team::getComp(size_t i)
 {
-    string  *comp = new string[6];
+	string  *comp = new string[6];
 
-    sortComp(i);
-    qDebug() << _teamComps[i];
-    auto it = _teamComps[i].begin();
-    for (size_t j = 0; j < 6; j++)
-    {
-        comp[j] = it->second;
-        it++;
-    }
-    return comp;
+	sortComp(i);
+	qDebug() << _teamComps[i];
+	auto it = _teamComps[i].begin();
+	for (size_t j = 0; j < 6; j++)
+	{
+		comp[j] = it->second;
+		it++;
+	}
+	return comp;
 }
-void    Team::changeComp(int heroes[5], int index)
+void	Team::changeComp(int heroes[5], int index)
 {
-    qDebug() << heroes << " " << index << "\n";
-    _teamComps[index]["TANK"] = _heroes[heroes[0]];
-    _teamComps[index]["DPS1"] = _heroes[heroes[1] + TANKAMT];
-    _teamComps[index]["DPS2"] = _heroes[heroes[2] + TANKAMT];
-    _teamComps[index]["SUPP1"] = _heroes[heroes[3] + TANKAMT + DPSAMT];
-    _teamComps[index]["SUPP2"] = _heroes[heroes[4] + TANKAMT + DPSAMT];
-    sortComp(index);
-    saveTeam();
-    updateTime();
+	qDebug() << heroes << " " << index << "\n";
+	_teamComps[index]["TANK"] = _heroes[heroes[0]];
+	_teamComps[index]["DPS1"] = _heroes[heroes[1] + TANKAMT];
+	_teamComps[index]["DPS2"] = _heroes[heroes[2] + TANKAMT];
+	_teamComps[index]["SUPP1"] = _heroes[heroes[3] + TANKAMT + DPSAMT];
+	_teamComps[index]["SUPP2"] = _heroes[heroes[4] + TANKAMT + DPSAMT];
+	sortComp(index);
+	saveTeam();
+	updateTime();
 }
 
 std::ostream & operator<<(std::ostream &stream, const Team &object)
