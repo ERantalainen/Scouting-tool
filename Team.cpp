@@ -544,7 +544,7 @@ QString  Team::retQstats()
         if (_heroCount[i] == 0)
             continue ;
 
-        result << "	" << _heroes[i] << " picked: " << _heroCount[i] << "<img 'src=file:./icons/Icon-" + _heroes[i] + ".webp' alt = ''>";
+        result << "	" << _heroes[i] << " picked: " << _heroCount[i] << "<img src='file:./icons/Icon-" + _heroes[i] + ".webp' alt = ''/>";
         percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
         result << " (" << setprecision(3) << percentage << "%)\n";
         if (_heroCount[i] > _comps / 3)
@@ -602,7 +602,7 @@ void	Team::displayMapStats()
 			break ;
 		}
 	}
-	string map = _maps[index]; 
+	string map = _maps[index];
 	for (size_t i = 0; i < _comps; i++)
 	{
 		if (_teamComps[i]["MAP"] == map)
