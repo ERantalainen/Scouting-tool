@@ -31,6 +31,7 @@ void loadTeams(vector<Team *> &teams)
     string          name;
     string			heroes[6];
     string			hero;
+	string			notes;
     unsigned int	i = 0;
 
     save.open(SAVEDATA);
@@ -49,6 +50,14 @@ void loadTeams(vector<Team *> &teams)
         teams.push_back(new Team(name));
         while (getline(teamData, hero))
         {
+			if (hero.compare("NOTES:") == 0)
+			{
+				while (getline(teamData, hero) && hero.compare("EOF") != 0)
+				{
+					notes.append(hero);
+				}
+				teams[teams.size() -1]->setNotes(notes);
+			}
             heroes[i] = hero;
             i++;
             if (i == 6)

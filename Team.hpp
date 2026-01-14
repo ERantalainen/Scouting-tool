@@ -101,6 +101,7 @@ class Team
 	private:
 		string	_name;
 		string	_save;
+		string	_notes;
 		time_t	_created;
 		time_t	_updated;
 		vector<map<string, string>>	_teamComps;
@@ -121,6 +122,7 @@ class Team
         QString retQstats(QTextEdit *info);
 		void	resetStats();
 		void	getHeroes();
+		void	setNotes(string notes);
 		void	addHeroes(size_t i);
 		void	newComp();
         void	addComp(string heroes[6]);
