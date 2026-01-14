@@ -13,6 +13,117 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+/* Labels (text and images) */
+QLabel {
+    color: #FFFFFF;
+    padding: 8px;                 /* padding around text or pixmap */
+    qproperty-alignment: AlignLeft;
+}
+
+/* Optional alignment helpers: set widget-&gt;setProperty(&quot;align&quot;, &quot;...&quot;) */
+QLabel[align=&quot;left&quot;]   { qproperty-alignment: AlignLeft; }
+QLabel[align=&quot;center&quot;] { qproperty-alignment: AlignCenter; }
+QLabel[align=&quot;right&quot;]  { qproperty-alignment: AlignRight; }
+
+QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox, QComboBox {
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 1px solid #FFD400;    /* yellow accent */
+    border-radius: 4px;
+    padding: 6px 8px;
+    selection-background-color: #FFD400;
+    selection-color: #000000;
+}
+
+QLineEdit[align=&quot;left&quot;]   { qproperty-alignment: AlignLeft; }
+QLineEdit[align=&quot;center&quot;] { qproperty-alignment: AlignCenter; }
+QLineEdit[align=&quot;right&quot;]  { qproperty-alignment: AlignRight; }
+
+/* Buttons */
+QPushButton {
+    background-color: #FFD400;    /* yellow */
+    color: #000000;               /* black text */
+    border: 1px solid #FFD400;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-weight: 600;
+}
+QPushButton:hover  { background-color: #FFE34D; }
+QPushButton:pressed{ background-color: #E6BF00; }
+QPushButton:disabled {
+    background-color: #2A2A2A;
+    color: #777777;
+    border-color: #2A2A2A;
+}
+
+/* Group boxes and frames */
+QGroupBox {
+    border: 1px solid #FFD400;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding: 8px;
+    color: #FFFFFF;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 6px;
+    color: #FFD400;
+}
+
+QFrame {
+    border: 1px solid #444444;
+    border-radius: 4px;
+}
+
+/* Lists and tables */
+QListView, QTreeView, QTableView {
+    background-color: #000000;
+    color: #FFFFFF;
+    alternate-background-color: #111111;
+    selection-background-color: #FFD400;
+    selection-color: #000000;
+}
+QHeaderView::section {
+    background-color: #222222;
+    color: #FFFFFF;
+    border: 1px solid #444444;
+    padding: 6px 8px;
+}
+
+/* Tooltips */
+QToolTip {
+    background-color: #FFD400;
+    color: #000000;
+    border: 1px solid #FFD400;
+    padding: 6px 8px;
+}
+
+/* Checkboxes and radio buttons */
+QCheckBox, QRadioButton {
+    color: #FFFFFF;
+    padding: 4px;
+}
+QCheckBox::indicator, QRadioButton::indicator {
+    width: 14px;
+    height: 14px;
+}
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+    background-color: #FFD400;
+    border: 1px solid #FFD400;
+}
+QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
+    background-color: #000000;
+    border: 1px solid #FFFFFF;
+}
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QStackedWidget" name="Pages">
     <property name="geometry">
@@ -20,11 +131,11 @@
       <x>0</x>
       <y>0</y>
       <width>621</width>
-      <height>321</height>
+      <height>361</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="MenuPage">
      <property name="contextMenuPolicy">
@@ -33,13 +144,20 @@
      <widget class="QWidget" name="verticalLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>80</y>
-        <width>160</width>
-        <height>175</height>
+        <x>220</x>
+        <y>50</y>
+        <width>216</width>
+        <height>252</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#ffff00;&quot;&gt;SCOUTING APP v. 0.7&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QPushButton" name="CreateTeam">
          <property name="text">
@@ -95,9 +213,9 @@
      <widget class="QTextEdit" name="StatsInfo">
       <property name="geometry">
        <rect>
-        <x>180</x>
+        <x>200</x>
         <y>40</y>
-        <width>421</width>
+        <width>401</width>
         <height>231</height>
        </rect>
       </property>
@@ -234,8 +352,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <rect>
         <x>10</x>
         <y>30</y>
-        <width>165</width>
-        <height>80</height>
+        <width>174</width>
+        <height>81</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -418,8 +536,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <rect>
         <x>40</x>
         <y>20</y>
-        <width>537</width>
-        <height>268</height>
+        <width>602</width>
+        <height>339</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -450,7 +568,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>ADD COMP</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignLeading</set>
          </property>
         </widget>
        </item>
@@ -1028,7 +1146,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>SAVED COMP</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignLeading</set>
          </property>
         </widget>
        </item>
@@ -1054,8 +1172,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <rect>
         <x>30</x>
         <y>30</y>
-        <width>551</width>
-        <height>221</height>
+        <width>602</width>
+        <height>244</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1080,7 +1198,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>EDIT TEAM</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignLeading</set>
          </property>
         </widget>
        </item>
@@ -1673,8 +1791,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <rect>
         <x>40</x>
         <y>40</y>
-        <width>527</width>
-        <height>222</height>
+        <width>592</width>
+        <height>293</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -1696,7 +1814,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>Team Name</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignLeading</set>
          </property>
         </widget>
        </item>
@@ -2134,7 +2252,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>SAVED TEAM</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignLeading</set>
          </property>
         </widget>
        </item>
@@ -2200,53 +2318,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>618</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuMenu">
-    <property name="title">
-     <string>Menu</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuCreateTeam">
-    <property name="title">
-     <string>CreateTeam</string>
-    </property>
-    <addaction name="separator"/>
-   </widget>
-   <widget class="QMenu" name="menuEditTeam">
-    <property name="title">
-     <string>EditTeam</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuDeleteTeam">
-    <property name="title">
-     <string>DeleteTeam</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuViewStats">
-    <property name="title">
-     <string>ViewStats</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuView_By_Map">
-    <property name="title">
-     <string>View By Map</string>
-    </property>
-   </widget>
-   <addaction name="menuMenu"/>
-   <addaction name="menuCreateTeam"/>
-   <addaction name="menuEditTeam"/>
-   <addaction name="menuDeleteTeam"/>
-   <addaction name="menuViewStats"/>
-   <addaction name="menuView_By_Map"/>
-  </widget>
  </widget>
  <resources/>
  <connections/>
