@@ -13,16 +13,16 @@ So, this is Scouting-Tool 2.0 now with a GUI powered by QT.
 
 ## PLANNED
 
-### Visual overhaul
--> More colors
--> Hero portraits
+### ~~Visual overhaul~~ (DONE)
+~~-> More colors~~
+~~-> Hero portraits~~
 
 ### More data
 -> Ban tracking support
 -> Optional notes
 
 ### Community requests
--> Few items requested by other coaches, and analysts I plan to implement, secret for now.
+-> Few items requested by other coaches, and analysts I plan to implement.
 
 <img width="612" height="340" alt="kuva" src="https://github.com/user-attachments/assets/c2bfbb73-6d3b-4a02-88b2-29b95c3eaf53" />
 
