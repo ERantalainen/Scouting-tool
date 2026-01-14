@@ -16,6 +16,7 @@
 #include <QTextStream>
 #include <QTextEdit>
 #include <QfileInfo>
+#include <QResource>
 
 using namespace std;
 

@@ -56,7 +56,7 @@ void MainWindow::on_ViewStats_clicked()
 {
     QString teams_list;
     string  str_teams;
-    
+
     ui->StatsInfo->clear();
     for (size_t i = 0; i < teams.size(); i++)
     {

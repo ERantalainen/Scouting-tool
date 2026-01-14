@@ -1,0 +1,47 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>icons/Icon-ANA.png</file>
+        <file>icons/Icon-ASHE.png</file>
+        <file>icons/Icon-BALL.png</file>
+        <file>icons/Icon-BASTION.png</file>
+        <file>icons/Icon-BRIG.png</file>
+        <file>icons/Icon-CASS.png</file>
+        <file>icons/Icon-DOOM.png</file>
+        <file>icons/Icon-DVA.png</file>
+        <file>icons/Icon-ECHO.png</file>
+        <file>icons/Icon-FREJA.png</file>
+        <file>icons/Icon-GENJI.png</file>
+        <file>icons/Icon-HANZO.png</file>
+        <file>icons/Icon-HOG.png</file>
+        <file>icons/Icon-ILLARI.png</file>
+        <file>icons/Icon-JQ.png</file>
+        <file>icons/Icon-JUNK.png</file>
+        <file>icons/Icon-JUNO.png</file>
+        <file>icons/Icon-KIRIKO.png</file>
+        <file>icons/Icon-LUCIO.png</file>
+        <file>icons/Icon-LW.png</file>
+        <file>icons/Icon-MAUGA.png</file>
+        <file>icons/Icon-MEI.png</file>
+        <file>icons/Icon-MERCY.png</file>
+        <file>icons/Icon-MOIRA.png</file>
+        <file>icons/Icon-ORI.png</file>
+        <file>icons/Icon-PHARAH.png</file>
+        <file>icons/Icon-RAM.png</file>
+        <file>icons/Icon-REAPER.png</file>
+        <file>icons/Icon-REIN.png</file>
+        <file>icons/Icon-SIG.png</file>
+        <file>icons/Icon-SOJ.png</file>
+        <file>icons/Icon-SOLDIER.png</file>
+        <file>icons/Icon-SOMBRA.png</file>
+        <file>icons/Icon-SYM.png</file>
+        <file>icons/Icon-TORB.png</file>
+        <file>icons/Icon-TRACER.png</file>
+        <file>icons/Icon-VENDETTA.png</file>
+        <file>icons/Icon-VENTURE.png</file>
+        <file>icons/Icon-WIDOW.png</file>
+        <file>icons/Icon-WINSTON.png</file>
+        <file>icons/Icon-WU.png</file>
+        <file>icons/Icon-ZARYA.png</file>
+        <file>icons/Icon-ZEN.png</file>
+    </qresource>
+</RCC>

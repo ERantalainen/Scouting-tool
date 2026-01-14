@@ -527,10 +527,21 @@ string  Team::retStats()
 	return result.str();
 }
 
+static void assignStringAsHtml(QTextEdit *info, stringstream &str)
+{
+    QString conversion;
+
+    conversion.assign(str.str());
+    conversion = conversion.toHtmlEscaped();
+    conversion.append("<br>");
+    info->insertHtml(conversion);
+    str.str("");
+}
+
 QString  Team::retQstats(QTextEdit *info)
 {
 	vector<pair<double, int>>	mostCommon;
-	QString		 conv;
+    QString         conv;
 	stringstream	temp;
 	calcStats();
 	// for (size_t i = 0; i < _teamComps.size(); i++)
@@ -540,24 +551,29 @@ QString  Team::retQstats(QTextEdit *info)
 	// }
 	info->insertPlainText("Overall: \n");
 	double	percentage = 0;
-	info->acceptRichText();
-	for (size_t i = 0; i < 13; i++)
+	for (size_t i = 0; i < TANKAMT; i++)
 	{	
 		if (_heroCount[i] == 0)
 			continue ;
-		temp << "	" << _heroes[i] << " picked: " << _heroCount[i];
+        temp << "	" << _heroes[i] << " picked: " << _heroCount[i] << "    ";
 		conv.assign(temp.str());
-		info->setText(conv);
-		temp.flush();
-		temp << "<img src='file:./icons/Icon-" << _heroes[i] << ".webp' alt = ''/>";
+        conv = conv.toHtmlEscaped();
+        info->insertHtml(conv);
+        temp.str("");
+        temp << " <img src=':resources/icons/Icon-" << _heroes[i] << ".png' alt = ''  height=16 width=16/>";
+        QString path = QString(":resources/icons/Icon-%1.png").arg(QString::fromStdString(_heroes[i]));
+        qDebug() << path << "\n";
+        QResource check(path);
+        if (!check.isValid())
+        {
+            qDebug() << "Image not found: " << path << "\n";
+        }
 		conv.assign(temp.str());
 		info->insertHtml(conv);
-		temp.flush();
+        temp.str("");
 		percentage = ((static_cast<double>(_heroCount[i]) / static_cast<double>(_comps)) * 100);
-		temp << " (" << setprecision(3) << percentage << "%)\n";
-		conv.assign(temp.str());
-		info->insertPlainText(conv);
-		temp.flush();
+        temp << " (" << setprecision(3) << percentage << "%)\n";
+        assignStringAsHtml(info, temp);
 		if (_heroCount[i] > _comps / 3)
 			mostCommon.push_back(make_pair(percentage, i));
 	}
@@ -565,32 +581,31 @@ QString  Team::retQstats(QTextEdit *info)
 	{
 		if (_heroCount[i] == 0)
 			continue ;
-		temp << "	" << _heroes[i] << " picked: " << _heroCount[i];
+        temp << "	" << _heroes[i] << " picked: " << _heroCount[i] << "    ";
 		conv.assign(temp.str());
-		info->insertText(conv);
-		temp.flush();
-		temp << "<img src='file:./icons/Icon-" << _heroes[i] << ".webp' alt = ''/>";
+        conv = conv.toHtmlEscaped();
+        info->insertHtml(conv);
+        temp.str("");
+        temp << "<img src=':resources/icons/Icon-" << _heroes[i] << ".png' alt = '' height=16 width=16/>";
 		conv.assign(temp.str());
-		info->insertPlainText(conv);
-		temp.flush();
+        info->insertHtml(conv);
+        temp.str("");
 		percentage = ((static_cast<double>(_heroCount[i]) / (static_cast<double>(_comps))) * 100);
 		temp << " (" << setprecision(3) << percentage << "%)\n";
-		conv.assign(temp.str());
-		info->insertPlainText(conv);
-		temp.flush();
+        assignStringAsHtml(info, temp);
 		if (_heroCount[i] > (_comps / 3))
 			mostCommon.push_back(make_pair(percentage, i));
 	}
+    info->insertHtml(QString("<br>"));
 	temp << "Most common: \n";
+    assignStringAsHtml(info, temp);
 	sort(mostCommon.begin(), mostCommon.end());
 	for (size_t i = 0; i < mostCommon.size(); i++)
 	{
-		temp << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%)\n";
+        temp << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%) \n";
+        assignStringAsHtml(info, temp);
 	}
-	QString res;
-	conv.assign(temp.str());
-	info->insertPlainText(conv);
-	temp.flush();
+    QString res;
 	res.assign(temp.str());
 	return res;
 }
