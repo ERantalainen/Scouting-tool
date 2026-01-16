@@ -124,6 +124,8 @@ class Team
 			@param pointer to the QTextEdit box
 		*/
 		QString retQstats(QTextEdit *info);
+		QString retHtmlNotes();
+		QString retStringNotes();
 		void	resetStats();
 		void	getHeroes();
 		void	setNotes(string notes);
