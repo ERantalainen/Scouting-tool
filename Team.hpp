@@ -118,9 +118,16 @@ class Team
 		Team();
 		Team(string name);
 		~Team();
+
+		vector<map<string, string>> getComps() const;
+		string	getName() const;
+		string  *getComp(size_t i);
+		string	getSaveName() const;
+		time_t	getCreated() const;
+		time_t	getUpdated() const;
 		void	getStats();
 		size_t	 getCompAmt();
-		string	retStats();
+		void	getHeroes();
 		/*
 			Applies a teams stats info to QTextEdit in view stats page
 			@param pointer to the QTextEdit box
@@ -128,8 +135,10 @@ class Team
 		QString retQstats(QTextEdit *info);
 		QString retHtmlNotes();
 		QString retStringNotes();
+			string	retStats();
 		void	resetStats();
-		void	getHeroes();
+		string  retMapStats(int map);
+
 		void	setNotes(string notes);
 		void	addHeroes(size_t i);
 		void	newComp();
@@ -159,13 +168,8 @@ class Team
 		void	saveTeam();
 		void	selectMap(int i);
 		void	displayMapStats();
-		string  retMapStats(int map);
-		vector<map<string, string>> getComps() const;
-		string	getName() const;
-		string  *getComp(size_t i);
-		string	getSaveName() const;
-		time_t	getCreated() const;
-		time_t	getUpdated() const;
+
+
 };
 
 void	listTeams(vector<Team *> teams);
