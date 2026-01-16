@@ -50,139 +50,29 @@ void loadTeams(vector<Team *> &teams)
         teams.push_back(new Team(name));
         while (getline(teamData, hero))
         {
-			if (hero.compare("NOTES:") == 0)
+			if (hero.starts_with("NOTES:") == 0)
 			{
 				while (getline(teamData, hero) && hero.compare("EOF") != 0)
 				{
 					notes.append(hero);
 				}
-				teams[teams.size() -1]->setNotes(notes);
+				teams[CURRTEAM]->setNotes(notes);
+				continue ;
+			}
+			if (hero.starts_with("ban:"))
+			{
+				teams[CURRTEAM]->addBan(hero.substr(hero.find(":") + 1));
+				continue;
 			}
             heroes[i] = hero;
             i++;
             if (i == 6)
             {
-                teams[teams.size() - 1]->addComp(heroes);
+                teams[CURRTEAM]->addComp(heroes);
                 for (int j = 0; j < 6; j++)
                     heroes[j].clear();
                 i = 0;
             }
-        }
-    }
-}
-
-int core ()
-{
-
-    cout << HIGREEN << "WELCOME TO THE SCOUTING MANAGER\n\n\n" << RESET;
-    while (1)
-    {
-        string	input;
-        int		option;
-
-        cout << BWHITE << "Choose an OPTION:\n";
-        cout <<	"	1. Create new team\n" << "	2. Edit team\n" << "	3. Delete team\n";
-        cout << "	4. Display Team stats\n	5. Display map comps\n";
-        cin >> input;
-        try
-        {
-            option = stoi(input);
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-            continue ;
-        }
-        if (option == 1)
-        {
-
-        }
-        if (option == 2)
-        {
-
-        }
-        if (option == 3)
-        {
-            if (teams.size() < 1)
-            {
-                std::cerr << HIRED << "No teams to delete, please create a team first\n";
-                continue;
-            }
-            std::cout << HIWHITE << "Select a team:\n\n" << RESET;
-            listTeams(teams);
-            std::cout << HIWHITE << "Input team: ";
-            std::cin >> input;
-            std::cout << RESET;
-            try
-            {
-                option = stoi(input);
-            }
-            catch(const std::exception& e)
-            {
-                std::cerr << e.what() << '\n';
-                continue ;
-            }
-            if (option < 0 || static_cast<unsigned int>(option) > teams.size())
-            {
-                std::cout << HIRED << "Invalid input returning \n";
-                continue ;
-            }
-            delete teams[option - 1];
-            teams.erase(teams.begin() + (option - 1));
-        }
-        if (option == 4)
-        {
-            if (teams.size() < 1)
-            {
-                std::cerr << HIRED << "No teams to display, please create a team first\n";
-                continue;
-            }
-            std::cout << HIWHITE << "Select a team:\n\n" << RESET;
-            listTeams(teams);
-            std::cout << HIWHITE << "Input team: ";
-            std::cin >> input;
-            std::cout << RESET;
-            try
-            {
-                option = stoi(input);
-            }
-            catch(const std::exception& e)
-            {
-                std::cerr << e.what() << '\n';
-                std::cout << HIRED << "Invalid input returning \n";
-                continue ;
-            }
-            if (option < 0 || static_cast<unsigned int>(option) > teams.size())
-            {
-                std::cout << HIRED << "Invalid input returning \n";
-                continue ;
-            }
-            teams[option - 1]->printAllComps();
-            cout << "\n\n";
-        }
-        if (option == 5)
-        {
-            std::cout << HIWHITE << "Select a team:\n\n" << RESET;
-            listTeams(teams);
-            std::cout << HIWHITE << "Input team: ";
-            std::cin >> input;
-            std::cout << RESET;
-            try
-            {
-                option = stoi(input);
-            }
-            catch(const std::exception& e)
-            {
-                std::cerr << e.what() << '\n';
-                std::cout << HIRED << "Invalid input returning \n";
-                continue ;
-            }
-            if (option < 0 || static_cast<unsigned int>(option) > teams.size())
-            {
-                std::cout << HIRED << "Invalid input returning \n";
-                continue ;
-            }
-            teams[option - 1]->displayMapStats();
         }
     }
 }

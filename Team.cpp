@@ -8,11 +8,29 @@ static	void	clearScreen()
 	cout.flush();
 }
 
+void	Team::addComp(string heroes[6], string ban)
+{
+	string	role;
+
+	this->newComp();
+	for (size_t i = 0; i < 6; i++)
+	{
+		if (heroes[i].find(":") == string::npos)
+		{
+			std::cerr << HIRED << "Invalid/Corrupted save file\n" << RESET;
+		}
+		role = heroes[i].substr(0, heroes[i].find(":"));
+		_teamComps[_comps - 1][role] = heroes[i].substr(heroes[i].find(":") + 1);
+	}
+	_bans.push_back(ban);
+	saveTeam();
+}
 
 void	Team::addComp(string heroes[6])
 {
 	string	role;
 
+	_bans.push_back("UNKNOWN");
 	this->newComp();
 	for (size_t i = 0; i < 6; i++)
 	{
@@ -276,6 +294,11 @@ vector<map<string, string>>	Team::getComps() const
 	return _teamComps;
 }
 
+void	Team::addBan(string ban)
+{
+	_bans.push_back(ban);
+}
+
 void	Team::saveTeam()
 {
 	fstream	team(_save);
@@ -293,6 +316,7 @@ void	Team::saveTeam()
 			team << it->first << ":" << it->second << "\n";
 			it++;
 		}
+		team << "ban:" << _bans[i];
 	}
     team << "NOTES:\n";
 	team << _notes;

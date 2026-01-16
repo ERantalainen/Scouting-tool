@@ -26,6 +26,7 @@ using namespace std;
 #define DPSAMT 20
 #define SUPPAMT 12
 #define TOTAL 45
+#define CURRTEAM teams.size() - 1
 
 enum	heroes
 {
@@ -105,6 +106,7 @@ class Team
 		time_t	_created;
 		time_t	_updated;
 		vector<map<string, string>>	_teamComps;
+		vector<string>	_bans;
 		vector<unsigned int>	_heroCount;
 		enum	heroes	_hero;
 		bool	_dps = false;
@@ -131,6 +133,8 @@ class Team
 		void	setNotes(string notes);
 		void	addHeroes(size_t i);
 		void	newComp();
+		void	addBan(string ban);
+		void	addComp(string heroes[6], string ban);
 		void	addComp(string heroes[6]);
 		/*
 			Adds a full team composition based on indexes
