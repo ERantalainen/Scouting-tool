@@ -215,7 +215,7 @@ void	Team::sortComp(int i)
 			std::swap(itA, itB);
 	}
 	itA++;
-	if (itA->first != "SUPP2")
+	while (itA->first != "SUPP2")
 	{
 		auto itB = _teamComps[i].find("SUPP2");
 		if (itB != _teamComps[i].end())
