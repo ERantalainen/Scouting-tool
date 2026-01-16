@@ -20,6 +20,7 @@
 
 using namespace std;
 
+#define MAPAMT _maps.size()
 #define ICONS "./icons/"
 #define SAVEDATA	"./data/save.dat"
 #define TANKAMT 13
@@ -27,56 +28,6 @@ using namespace std;
 #define SUPPAMT 12
 #define TOTAL 45
 #define CURRTEAM teams.size() - 1
-
-enum	heroes
-{
-	EMPTY,
-	DVA,
-	DOOM,
-	HAZ,
-	JQ,
-	MAUGA,
-	ORI,
-	RAM,
-	REIN,
-	HOG,
-	SIG,
-	WINSTON,
-	BALL,
-	ZARYA,
-	ASHE,
-	BASTION,
-	CASS,
-	ECHO,
-	FREJA,
-	GENJI,
-	HANZO,
-	JUNK,
-	MEI,
-	PHARAH,
-	REAPER,
-	SOJ,
-	SOLDIER,
-	SOMBRA,
-	SYM,
-	TORB,
-	TRACER,
-	VENTURE,
-	WIDOW,
-	VENDETTA,
-	ANA,
-	BAP,
-	BRIG,
-	ILLARI,
-	JUNO,
-	KIRI,
-	LW,
-	LUCIO,
-	MERCY,
-	MOIRA,
-	WU,
-	ZEN
-};
 
 const 	vector<string>	_heroes = { "DVA", "DOOM", "HAZ", "JQ", "MAUGA", "ORI", "RAM", "REIN",
 	"HOG", "SIG", "WINSTON", "BALL", "ZARYA", "ASHE", "BASTION", "CASS", "ECHO",
@@ -93,9 +44,6 @@ const	vector<string>	_maps = { "ANTARCTIC - ICEBREAKER", "ANTARCTIC - LABS", "AN
 	"DORADO", "HAVANA", "JUNKERTOWN", "RIALTO", "ROUTE",
 	"SHAMBALI", "GIB", "AATLIS", "NEW JUNK CITY", "SURAVASA", "BLIZZ", "EICH", "HOLLYWOOD",  "KR",
 	"MIDTOWN", "NUMBANI", "PARAISO", "COLOSSEO", "ESPERANCA", "NQS", "RUNASAPI" };
-
-#define MAPAMT _maps.size()
-
 
 class Team
 {
@@ -135,7 +83,7 @@ class Team
 		QString retQstats(QTextEdit *info);
 		QString retHtmlNotes();
 		QString retStringNotes();
-			string	retStats();
+		string	retStats();
 		void	resetStats();
 		string  retMapStats(int map);
 
@@ -173,4 +121,4 @@ class Team
 };
 
 void	listTeams(vector<Team *> teams);
-std::ostream & operator<<(std::ostream &stream, const Team &object);
+friend ostream & operator<<(std::ostream &stream, const Team &object);

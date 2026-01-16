@@ -691,7 +691,7 @@ void	Team::changeComp(int heroes[5], int index)
 	updateTime();
 }
 
-std::ostream & operator<<(std::ostream &stream, const Team &object)
+friend ostream & operator<<(std::ostream &stream, const Team &object)
 {
 	string	created;
 	string	updated;
