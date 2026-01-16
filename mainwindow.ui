@@ -144,49 +144,61 @@ QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
      <widget class="QWidget" name="verticalLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>50</y>
-        <width>216</width>
-        <height>252</height>
+        <x>200</x>
+        <y>40</y>
+        <width>224</width>
+        <height>270</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item row="0" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#ffff00;&quot;&gt;SCOUTING APP v. 0.7&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="1" column="0">
         <widget class="QPushButton" name="CreateTeam">
          <property name="text">
           <string>Create Team</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="2" column="0">
         <widget class="QPushButton" name="EditTeam">
          <property name="text">
           <string>Edit Team</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="3" column="0">
         <widget class="QPushButton" name="AddCompMenu">
          <property name="text">
           <string>Add Comps</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="4" column="0">
         <widget class="QPushButton" name="ViewStats">
          <property name="text">
           <string>View Stats</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="5" column="0">
         <widget class="QPushButton" name="DeleteTeam">
          <property name="text">
           <string>Delete Team</string>

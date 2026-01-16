@@ -69,7 +69,7 @@ Team::Team(string name) : _name(name)
 	auto time = chrono::system_clock::now();
 	_created = chrono::system_clock::to_time_t(time);
 	_updated = _created;
-	_heroCount.resize(_heroes.size())
+    _heroCount.resize(_heroes.size());
 	ofstream team_file(_save, ios_base::app);
 	if (!team_file.is_open())
 		std::cerr << "Could not open team file: " << _save << "\n";
@@ -294,7 +294,7 @@ void	Team::saveTeam()
 			it++;
 		}
 	}
-	team << "NOTES:\n"
+    team << "NOTES:\n";
 	team << _notes;
 	team << "EOF\n";
 	team.close();
@@ -452,6 +452,23 @@ void	Team::selectMap(int i)
 		}
 	}
 	_teamComps[i]["MAP"] = _maps[index];
+}
+
+QString	Team::retHtmlNotes()
+{
+	QString	str;
+	QString	temp;
+	string	notes(_notes);
+
+	while (notes.find("\n") != string::npos)
+	{
+		temp.assign(notes.substr(0, notes.find("\n")));
+        temp = temp.toHtmlEscaped();
+        temp.append("<br>");
+        str.append(temp);
+        notes = notes.substr(notes.find("\n") + 1);
+	}
+    return str;
 }
 
 void	Team::printAllComps()
@@ -612,6 +629,8 @@ QString  Team::retQstats(QTextEdit *info)
         temp << _heroes[mostCommon[i].second] << " " << _heroCount[mostCommon[i].second] << " (" << mostCommon[i].first << "%) \n";
         assignStringAsHtml(info, temp);
 	}
+    temp << "Notes: <br>" << retHtmlNotes().toStdString();
+    assignStringAsHtml(info, temp);
     QString res;
 	res.assign(temp.str());
 	return res;
