@@ -127,13 +127,28 @@ void	Team::getHeroes()
 {
 	for (size_t i = 0; i < _heroes.size(); i++)
 	{
-		std::cout << WHITE << "	" << _heroes[i] << RESET << "\n";
+        std::cout << WHITE << "	" << _heroes[i] << RESET << "\n";
 	}
 }
 
 void	Team::deleteTeam()
 {
+    ifstream	file(SAVEDATA);
+	string		temp;
+	string		data;
 
+	while(getline(file, data))
+	{
+		if (data == _name)
+			continue ;
+		else
+			temp.append(data + "\n");	
+	}
+	file.close();
+	ofstream	save(SAVEDATA);
+	save << temp;
+	save.close();
+	remove(_save);
 }
 
 string	Team::getName() const
@@ -526,11 +541,6 @@ QString  Team::retQstats(QTextEdit *info)
     QString         conv;
 	stringstream	temp;
 	calcStats();
-	// for (size_t i = 0; i < _teamComps.size(); i++)
-	// {
-	//	 info->insertPlainText(returnComp(i));
-	//	 info->insertPlainText("\n");
-	// }
 	info->insertPlainText("Overall: \n");
 	double	percentage = 0;
 	for (size_t i = 0; i < TANKAMT; i++)

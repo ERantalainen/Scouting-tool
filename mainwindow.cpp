@@ -392,6 +392,7 @@ void MainWindow::on_DelButton_clicked()
 
 void MainWindow::on_DelConfirm_accepted()
 {
+    teams[teams.begin() + ui->DelTeamSel->currentIndex()].deleteTeam();
     teams.erase(teams.begin() + ui->DelTeamSel->currentIndex());
     ui->DelConfirm->hide();
 }
