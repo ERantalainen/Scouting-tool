@@ -24,6 +24,6 @@ So, this is Scouting-Tool 2.0 now with a GUI powered by QT.
 ### Community requests
 -> Few items requested by other coaches, and analysts I plan to implement.
 
-<img width="612" height="340" alt="kuva" src="https://github.com/user-attachments/assets/c2bfbb73-6d3b-4a02-88b2-29b95c3eaf53" />
+<img width="615" height="367" alt="kuva" src="https://github.com/user-attachments/assets/a8c7a102-93f9-4e91-9db9-1878d7e6a75e" />
 
-<img width="610" height="349" alt="kuva" src="https://github.com/user-attachments/assets/1c1eda44-23c8-41e1-8098-1e21d07a0f67" />
+<img width="618" height="395" alt="kuva" src="https://github.com/user-attachments/assets/e7dc3828-caab-42b2-bf12-8fd9a3e84ce7" />
