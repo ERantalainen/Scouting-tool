@@ -69,7 +69,7 @@ Team::Team(string name) : _name(name)
 	auto time = chrono::system_clock::now();
 	_created = chrono::system_clock::to_time_t(time);
 	_updated = _created;
-	_heroCount.resize(_heroes.size())
+    _heroCount.resize(_heroes.size());
 	ofstream team_file(_save, ios_base::app);
 	if (!team_file.is_open())
 		std::cerr << "Could not open team file: " << _save << "\n";
@@ -294,7 +294,7 @@ void	Team::saveTeam()
 			it++;
 		}
 	}
-	team << "NOTES:\n"
+    team << "NOTES:\n";
 	team << _notes;
 	team << "EOF\n";
 	team.close();

@@ -48,6 +48,8 @@ void MainWindow::on_EditTeam_clicked()
     }
     ui->EditTeamSel->blockSignals(false);
     ui->EditCompSel->blockSignals(false);
+    if (teams.size() < 1)
+        return ;
     ui->EditTeamSel->currentIndexChanged(0);
     ui->EditCompSel->setCurrentIndex(0);
 }

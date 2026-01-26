@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget {
-    background-color: #000000;
+    background-color: #1a1a1a;
     color: #FFFFFF;
 }
 
@@ -23,7 +23,7 @@
 QLabel {
     color: #FFFFFF;
     padding: 8px;                 /* padding around text or pixmap */
-    qproperty-alignment: AlignLeft;
+    qproperty-alignment: AlignCenter;
 }
 
 /* Optional alignment helpers: set widget-&gt;setProperty(&quot;align&quot;, &quot;...&quot;) */
@@ -32,7 +32,7 @@ QLabel[align=&quot;center&quot;] { qproperty-alignment: AlignCenter; }
 QLabel[align=&quot;right&quot;]  { qproperty-alignment: AlignRight; }
 
 QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox, QComboBox {
-    background-color: #000000;
+    background-color: #1a1a1a;
     color: #FFFFFF;
     border: 1px solid #FFD400;    /* yellow accent */
     border-radius: 4px;
@@ -128,9 +128,9 @@ QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
    <widget class="QStackedWidget" name="Pages">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>621</width>
+      <x>-20</x>
+      <y>10</y>
+      <width>631</width>
       <height>361</height>
      </rect>
     </property>
@@ -141,16 +141,30 @@ QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
      <property name="contextMenuPolicy">
       <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
      </property>
+     <widget class="QWidget" name="verticalLayoutWidget_7">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>611</width>
+        <height>343</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout"/>
+     </widget>
      <widget class="QWidget" name="verticalLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>50</y>
-        <width>216</width>
-        <height>252</height>
+        <x>20</x>
+        <y>-10</y>
+        <width>609</width>
+        <height>341</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>30</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_5">
          <property name="text">
@@ -229,7 +243,7 @@ QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
 QLabel {
     color: #FFFFFF;
     padding: 8px;                 /* padding around text or pixmap */
-    qproperty-alignment: AlignLeft;
+    qproperty-alignment: AlignCenter;
 }
 
 /* Optional alignment helpers: set widget-&gt;setProperty(&quot;align&quot;, &quot;...&quot;) */
@@ -518,26 +532,13 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </widget>
     </widget>
     <widget class="QWidget" name="AddCompPage">
-     <widget class="QPushButton" name="BackMap">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>280</y>
-        <width>75</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>BACK</string>
-      </property>
-     </widget>
      <widget class="QWidget" name="verticalLayoutWidget_3">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>20</y>
+        <x>20</x>
+        <y>-10</y>
         <width>602</width>
-        <height>339</height>
+        <height>344</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -568,7 +569,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>ADD COMP</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignLeading</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1146,7 +1147,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>SAVED COMP</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignLeading</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="BackMap">
+         <property name="text">
+          <string>BACK</string>
          </property>
         </widget>
        </item>
@@ -1198,7 +1206,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>EDIT TEAM</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignLeading</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1773,29 +1781,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="contextMenuPolicy">
       <enum>Qt::ContextMenuPolicy::ActionsContextMenu</enum>
      </property>
-     <widget class="QPushButton" name="BackCreate">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>290</y>
-        <width>75</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>BACK</string>
-      </property>
-     </widget>
      <widget class="QWidget" name="verticalLayoutWidget_5">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>40</y>
-        <width>592</width>
-        <height>293</height>
+        <x>30</x>
+        <y>0</y>
+        <width>591</width>
+        <height>337</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7">
+      <layout class="QGridLayout" name="gridLayout">
        <property name="leftMargin">
         <number>5</number>
        </property>
@@ -1808,23 +1803,35 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <property name="bottomMargin">
         <number>10</number>
        </property>
-       <item>
+       <item row="0" column="0">
         <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>Team Name</string>
+          <string>ADD TEAM</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignLeading</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QLineEdit" name="teamName"/>
+       <item row="1" column="0">
+        <widget class="QLineEdit" name="teamName">
+         <property name="text">
+          <string>Team name</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
        </item>
-       <item>
+       <item row="2" column="0">
         <widget class="QComboBox" name="MapSelect"/>
        </item>
-       <item>
+       <item row="3" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <property name="topMargin">
           <number>10</number>
@@ -2239,20 +2246,33 @@ li.checked::marker { content: &quot;\2612&quot;; }
          </item>
         </layout>
        </item>
-       <item>
+       <item row="4" column="0">
         <widget class="QPushButton" name="saveteam">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>SAVE TEAM</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="5" column="0">
         <widget class="QLabel" name="label_2">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>SAVED TEAM</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignLeading</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QPushButton" name="BackCreate">
+         <property name="text">
+          <string>BACK</string>
          </property>
         </widget>
        </item>
@@ -2276,10 +2296,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <widget class="QWidget" name="verticalLayoutWidget_6">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>80</y>
+        <x>210</x>
+        <y>40</y>
         <width>251</width>
-        <height>136</height>
+        <height>142</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -2298,9 +2318,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <widget class="QDialogButtonBox" name="DelConfirm">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>200</y>
-        <width>321</width>
+        <x>170</x>
+        <y>170</y>
+        <width>331</width>
         <height>111</height>
        </rect>
       </property>

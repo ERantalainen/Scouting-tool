@@ -9,7 +9,7 @@ QWidget {
 QLabel {
     color: #FFFFFF;
     padding: 8px;                 /* padding around text or pixmap */
-    qproperty-alignment: AlignLeft;
+    qproperty-alignment: AlignCenter;
 }
 
 /* Optional alignment helpers: set widget->setProperty("align", "...") */
@@ -18,13 +18,14 @@ QLabel[align="center"] { qproperty-alignment: AlignCenter; }
 QLabel[align="right"]  { qproperty-alignment: AlignRight; }
 
 QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox, QComboBox {
-    background-color: #000000;
+    background-color: #1a1a1a;
     color: #FFFFFF;
     border: 1px solid #FFD400;    /* yellow accent */
     border-radius: 4px;
     padding: 32px 8px;
     selection-background-color: #FFD400;
     selection-color: #000000;
+    qproperty-alignment: AlignCenter;
 }
 
 QLineEdit[align="left"]   { qproperty-alignment: AlignLeft; }
@@ -39,6 +40,7 @@ QPushButton {
     border-radius: 4px;
     padding: 6px 12px;
     font-weight: 600;
+    qproperty-alignment: AlignCenter;
 }
 QPushButton:hover  { background-color: #FFE34D; }
 QPushButton:pressed{ background-color: #E6BF00; }
@@ -55,6 +57,7 @@ QGroupBox {
     margin-top: 10px;
     padding: 8px;
     color: #FFFFFF;
+    qproperty-alignment: AlignCenter;
 }
 QGroupBox::title {
     subcontrol-origin: margin;
@@ -70,7 +73,7 @@ QFrame {
 
 /* Lists and tables */
 QListView, QTreeView, QTableView {
-    background-color: #000000;
+    background-color: #1a1a1a;
     color: #FFFFFF;
     alternate-background-color: #111111;
     selection-background-color: #FFD400;
@@ -89,12 +92,14 @@ QToolTip {
     color: #000000;
     border: 1px solid #FFD400;
     padding: 6px 8px;
+    qproperty-alignment: AlignCenter;
 }
 
 /* Checkboxes and radio buttons */
 QCheckBox, QRadioButton {
     color: #FFFFFF;
     padding: 4px;
+    qproperty-alignment: AlignCenter;
 }
 QCheckBox::indicator, QRadioButton::indicator {
     width: 14px;
@@ -105,6 +110,6 @@ QCheckBox::indicator:checked, QRadioButton::indicator:checked {
     border: 1px solid #FFD400;
 }
 QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
-    background-color: #000000;
+    background-color: #1a1a1a;
     border: 1px solid #FFFFFF;
 }
